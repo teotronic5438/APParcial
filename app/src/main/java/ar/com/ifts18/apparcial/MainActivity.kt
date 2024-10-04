@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun regresarHome(){
-        val intent = Intent(this, FourthActivity::class.java).apply {  }
+        val intent = Intent(this, TyCActivity::class.java).apply {  }
         startActivity(intent)
         finish()
     }
