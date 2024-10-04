@@ -26,20 +26,22 @@ class TyCActivity: AppCompatActivity() {
         val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
 
         aceptarTc.setOnClickListener{
-            mostrarToast("tocaste el boton de ACEPTAR")
+            // mostrarToast("tocaste el boton de ACEPTAR")
 
             misPreferencias.edit().putBoolean("terminosAceptados", true).apply()
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            // **Enviamos resultado a MainActivity**
+            setResult(RESULT_OK) // Informamos que fue exitoso
             finish()
         }
 
         denegarTc.setOnClickListener {
-            mostrarToast("tocaste el boton de DENEGAR")
+            // mostrarToast("tocaste el boton de DENEGAR")
 
             misPreferencias.edit().putBoolean("terminosAceptados", false).apply()
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            // **Enviamos resultado a MainActivity**
+            setResult(RESULT_CANCELED) // Informamos que no se aceptaron los términos
             finish()
         }
     }
