@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         // evento, al hacer click abre actvity TyC
         caja.setOnClickListener{
+            caja.isChecked = false
             mostrarToast("Ingresaste a terminos y condiciones")
             irATerminosYCondiciones()
         }
@@ -44,17 +45,21 @@ class MainActivity : AppCompatActivity() {
 
 
         // logica de validacion
-        botonTC.setOnClickListener{
+        botonTC.setOnClickListener {
             // casteo datos
             val nombre = etNombre.text.toString()
             val apellido = etApellido.text.toString()
             val correo = etCorreo.text.toString()
 
             // Verifico que haya llenado todos los campos
-            if (nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty()) {
-
-                mostrarToast("Por favor, completa todos los campos.")
-
+            if (nombre.isEmpty()){
+                mostrarToast("Complete el nombre")
+            } else if(apellido.isEmpty()){
+                mostrarToast("Complete su apellido")
+            } else if(correo.isEmpty()) {
+                mostrarToast("Complete su correo")
+            } else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(correo).matches()){
+                mostrarToast("El formato de correo es invalido!")
             } else if (!caja.isChecked) {
                 // Verifico que el checkbox de términos y condiciones está marcado
                 mostrarToast("Debes aceptar los términos y condiciones.")
@@ -80,13 +85,12 @@ class MainActivity : AppCompatActivity() {
     private fun irATerminosYCondiciones(){
         val intent = Intent(this, TyCActivity::class.java).apply {  }
         startActivity(intent)
-        finish()
+
     }
 
     private fun irATestInversor(){
         val intent = Intent(this, TestInversorActivity::class.java).apply {  }
         startActivity(intent)
-        finish()
     }
 
     private fun irAHome(){

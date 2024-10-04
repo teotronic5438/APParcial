@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Estado cuando está marcado (tildado) -->
+    <item android:state_checked="true" android:color="#27a248" /> <!-- Color del gradiente start -->
+
+    <!-- Estado cuando no está marcado -->
+    <item android:color="#25b4bc" /> <!-- Color del gradiente end -->
+</selector>
