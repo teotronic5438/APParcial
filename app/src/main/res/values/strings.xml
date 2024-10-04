@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">APParcial</string>
+    <string name="terra_moda_inversiones">Terra Moda Inversiones</string>
+    <string name="entrada_usuario">Entrada Usuario</string>
+    <string name="ingresar_nombre">Ingrese su nombre</string>
+    <string name="ingresar_apellido">Ingrese su apellido</string>
+    <string name="ingresar_correo">Ingrese su correo</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="ver_terminos_y_condiciones">Ver terminos y condiciones</string>
+    <string name="bienvenido">Bienvenido!</string>
 </resources>
