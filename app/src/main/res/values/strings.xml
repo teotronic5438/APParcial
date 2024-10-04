@@ -18,4 +18,7 @@ Ante el olvido de esta clave, el/la cliente/a podrá generar una nueva a través
 En caso que el/la cliente/a desee solicitar la baja del servicio e-resumen tanto de VISA como de MasterCard, deberá gestionarlo desde el mismo canal en el que solicitó la adhesión: las páginas web de VISA, haciendo clic acá1 y/o MasterCard haciendo clic acá2.
 El clic en SÍ ACEPTO importará mi expresa aceptación a todos y cada uno de los términos y condiciones indicados precedentemente y la constancia de haber tomado conocimiento y aceptado los términos y condiciones para la utilización de BIG9, haciendo clic acá3 y/o el sitio web de GRUPO9, haciendo clic acá4, como así también de haber obtenido toda la información necesaria para utilizar correctamente este medio, los riesgos derivados de su empleo y quién asume los mismos.
 El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto también se encuentra disposición de el/la cliente/a en el sitio web de GRUPO9, haciendo clic acá5.</string>
+    <string name="terminos_y_condiciones">Terminos y Condiciones</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="denegar">Denegar</string>
 </resources>

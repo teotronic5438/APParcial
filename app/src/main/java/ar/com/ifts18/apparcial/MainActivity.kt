@@ -8,8 +8,14 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 
 class MainActivity : AppCompatActivity() {
+    // TANTO PARA NO BORRAR INFOOOOOOOOOOOOOOOOOOOOOOOO
+    private lateinit var tycLauncher: ActivityResultLauncher<Intent>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,10 +26,26 @@ class MainActivity : AppCompatActivity() {
         val etApellido = findViewById<EditText>(R.id.etApellido)
         val etCorreo = findViewById<EditText>(R.id.etCorreo)
 
+        // Inicializa el launcher para manejar el resultado
+        tycLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                // Los términos fueron aceptados, marcamos el CheckBox
+                caja.isChecked = true
+                val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+                misPreferencias.edit().putBoolean("terminosAceptados", true).apply()
+            } else if (result.resultCode == RESULT_CANCELED) {
+                // Los términos fueron rechazados
+                caja.isChecked = false
+                val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+                misPreferencias.edit().putBoolean("terminosAceptados", false).apply()
+            }
+        }
+
+
         // evento, al hacer click abre actvity TyC
         caja.setOnClickListener{
             caja.isChecked = false
-            mostrarToast("Ingresaste a terminos y condiciones")
+            // mostrarToast("Ingresaste a terminos y condiciones")
             irATerminosYCondiciones()
         }
 
@@ -82,21 +104,22 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun irATerminosYCondiciones(){
-        val intent = Intent(this, TyCActivity::class.java).apply {  }
-        startActivity(intent)
-
+    private fun irATerminosYCondiciones() {
+        val intent = Intent(this, TyCActivity::class.java)
+        tycLauncher.launch(intent)
     }
 
     private fun irATestInversor(){
-        val intent = Intent(this, TestInversorActivity::class.java).apply {  }
+        val intent = Intent(this, TestInversorActivity::class.java)
         startActivity(intent)
     }
 
     private fun irAHome(){
-        val intent = Intent(this, HomeActivity::class.java).apply {  }
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
+        // NOTA SI FINALIZO SE CIERRA APP
+
     }
     
     private fun mostrarToast(mensajeToast: String){
