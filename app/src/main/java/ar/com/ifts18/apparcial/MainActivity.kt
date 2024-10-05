@@ -26,6 +26,13 @@ class MainActivity : AppCompatActivity() {
         val etApellido = findViewById<EditText>(R.id.etApellido)
         val etCorreo = findViewById<EditText>(R.id.etCorreo)
 
+        // SOLO PARA PRUEBAS HOME DESPUES BORRAR
+        val solopruebas = findViewById<Button>(R.id.pruebasAHome)
+        solopruebas.setOnClickListener{
+            irAHome()
+        }
+        // SOLO PARA PRUEBAS HOME DESPUES BORRAR
+
         // Inicializa el launcher para manejar el resultado
         tycLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
