@@ -111,7 +111,7 @@ class TestInversorActivity : AppCompatActivity() {
 
 
             // Toast.makeText(this, "Total: " + sumTotal.toString() , Toast.LENGTH_LONG).show()
-            val percentage = (sumTotal * 100) / 48;
+            val percentage = ((sumTotal.toFloat() / 12) * 100)
             var perfil: String = ""
 
             if (0 < percentage && percentage < 33) {
