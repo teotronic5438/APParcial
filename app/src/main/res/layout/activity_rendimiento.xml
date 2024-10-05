@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <EditText
+        android:id="@+id/montoRetirarEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Monto a Retirar" />
+
+    <EditText
+        android:id="@+id/montoInvertirEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Monto a Invertir" />
+
+    <EditText
+        android:id="@+id/montoBancoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Monto en el Banco" />
+
+    <EditText
+        android:id="@+id/tiempoPlazoFijoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tiempo Plazo Fijo (meses)"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/calcularButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calcular" />
+
+    <TextView
+        android:id="@+id/resultadosTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
