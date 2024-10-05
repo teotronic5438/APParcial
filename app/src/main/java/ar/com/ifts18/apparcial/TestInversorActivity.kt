@@ -1,5 +1,7 @@
 package ar.com.ifts18.apparcial
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -8,7 +10,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class TestInversorActivity : AppCompatActivity(){
+class TestInversorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_testinversor)
@@ -16,15 +18,15 @@ class TestInversorActivity : AppCompatActivity(){
         // aqui va el codigo
 
 
-        val btEnviar = findViewById<Button>(R.id.elem2)
+        val btSave = findViewById<Button>(R.id.save)
+        val btCancel = findViewById<Button>(R.id.cancel)
         val rgOpciones1 = findViewById<RadioGroup>(R.id.rg1pc)
         val rgOpciones2 = findViewById<RadioGroup>(R.id.rg2pc)
         val rgOpciones3 = findViewById<RadioGroup>(R.id.rg3pc)
 
         var sumTotal = 0;
 
-        btEnviar.setOnClickListener {
-
+        btSave.setOnClickListener {
 
 
             val rbSeleccionado1 = rgOpciones1.checkedRadioButtonId
@@ -106,24 +108,59 @@ class TestInversorActivity : AppCompatActivity(){
                 //TBD Se debe seleccionar un RB
                 Log.d("tag", "No se seleccionó nada")
             }
-        }
 
-        // Toast.makeText(this, "Total: " + sumTotal.toString() , Toast.LENGTH_LONG).show()
-        val percentage = (sumTotal * 100) / 12;
-        var perfil: String = ""
 
-        if ( 0 < percentage && percentage < 33) {
-            perfil = "De Riesgo"
-            Toast.makeText(this, "El perfil es $perfil" , Toast.LENGTH_LONG).show()
+            // Toast.makeText(this, "Total: " + sumTotal.toString() , Toast.LENGTH_LONG).show()
+            val percentage = (sumTotal * 100) / 48;
+            var perfil: String = ""
 
-        } else if (32 < percentage && percentage < 66) {
-            perfil = "Moderado"
-            Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
-        } else {
+            if (0 < percentage && percentage < 33) {
                 perfil = "Conservador"
-                Toast.makeText(this, "El perfil es $perfil" , Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
 
+            } else if (32 < percentage && percentage < 66) {
+                perfil = "Moderado"
+                Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
+            } else {
+                perfil = "De Riesgo"
+                Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
+
+            }
+
+
+            // guardo en my shared preferences el perfil
+            val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+            misPreferencias.edit().apply {
+
+                putString("perfil", perfil)
+                putBoolean("EstaLogueado", true)
+                apply()
+            }
+            irAHomeActivity()
         }
 
+
+        btCancel.setOnClickListener {
+
+            val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+            misPreferencias.edit().apply {
+
+                putBoolean("EstaLogueado", false)
+                apply()
+            }
+
+            irAMainActivity()
+        }
+    }
+
+
+        private fun irAHomeActivity(){
+            val intent = Intent(this, HomeActivity::class.java).apply {  }
+            startActivity(intent)
+        }
+
+        private fun irAMainActivity(){
+            val intent = Intent(this, MainActivity::class.java).apply {  }
+            startActivity(intent)
     }
 }
