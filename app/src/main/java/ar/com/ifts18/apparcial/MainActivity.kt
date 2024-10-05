@@ -31,6 +31,17 @@ class MainActivity : AppCompatActivity() {
         solopruebas.setOnClickListener{
             irAHome()
         }
+
+        val solorendimiento = findViewById<Button>(R.id.pruebasARendimiento)
+        solorendimiento.setOnClickListener{
+            irARendimiento()
+        }
+
+        val solohistorial = findViewById<Button>(R.id.pruebasAHistorial)
+        solohistorial.setOnClickListener{
+            irAHistorial()
+        }
+
         // SOLO PARA PRUEBAS HOME DESPUES BORRAR
 
         // Inicializa el launcher para manejar el resultado
@@ -125,9 +136,22 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
-        // NOTA SI FINALIZO SE CIERRA APP
-
     }
+
+
+    // SOLO PRUEBA DESPUES BORRAR
+    private fun irAHistorial(){
+        val intent = Intent(this, HistorialActivity::class.java)
+        startActivity(intent)
+        finish()
+    }    // SOLO PRUEBA DESPUES BORRAR
+
+    // SOLO PRUEBA DESPUES BORRAR
+    private fun irARendimiento(){
+        val intent = Intent(this, RendimientoActivity::class.java)
+        startActivity(intent)
+        finish()
+    }    // SOLO PRUEBA DESPUES BORRAR
     
     private fun mostrarToast(mensajeToast: String){
         Toast.makeText(this, mensajeToast, Toast.LENGTH_LONG).show()
