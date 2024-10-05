@@ -6,22 +6,46 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="@drawable/app_colores">
+
+    <!-- Texto de bienvenida -->
     <TextView
         android:id="@+id/textViewWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bienvenido al Historial"
         android:textSize="24sp"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        />
 
+    <!-- Navegación de vistas en el medio -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewWelcome"
+        android:layout_above="@id/buttonRegresar"
+        android:layout_marginTop="16dp"
+        app:menu="@menu/navigation_menu"/>
+
+    <!-- ListView dentro de la navegación aca se pone lo que llega de las consultas de los ultimos usuarios-->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewWelcome"
+        android:layout_above="@id/buttonRegresar"/>
+
+    <!-- Botón de regresar abajo -->
     <Button
         android:id="@+id/buttonRegresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver al Simulador"
-        android:layout_below="@id/textViewWelcome"
-        android:layout_marginTop="20dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="366dp"
-        android:layout_centerInParent="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
 </RelativeLayout>
