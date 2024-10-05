@@ -168,20 +168,20 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/elem1"
+        android:id="@+id/cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmar1"
+        android:text="Cancelar"
         android:elevation="8dp"
         android:layout_marginBottom="16dp"
         android:padding="12dp"
         />
 
     <Button
-        android:id="@+id/elem2"
+        android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmar2"
+        android:text="Guardar"
         android:elevation="8dp"
         android:layout_marginBottom="16dp"
         android:padding="12dp"
