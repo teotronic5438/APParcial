@@ -95,7 +95,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Solo para pruenas HOME"
+        android:text="Solo para pruebas HOME"
         />
     <!-- SOLO PARA PRUEBAS DESPUES VUELA -->
 

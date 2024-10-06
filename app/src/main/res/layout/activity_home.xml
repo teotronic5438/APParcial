@@ -3,7 +3,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <TextView
+        android:id="@+id/tvNumero1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hola: "
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvNumero2"
+        />
+    <TextView
+        android:id="@+id/tvNumero2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¡Bienvenido Admin!"
@@ -11,11 +23,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tv2"
+        app:layout_constraintBottom_toTopOf="@+id/tvNumero3"
         />
 
     <TextView
-        android:id="@+id/tv2"
+        android:id="@+id/tvNumero3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Que inversiòn desea simular?"
@@ -33,7 +45,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:autofillHints=""
+        android:inputType="textPersonName"
+        />
 
     <EditText
         android:id="@+id/et2"
@@ -43,6 +58,8 @@
         app:layout_constraintTop_toBottomOf="@+id/et1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:autofillHints=""
+        android:inputType="textPersonName"
         />
     <EditText
         android:id="@+id/et3"
@@ -52,6 +69,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et2"
+        android:autofillHints=""
+        android:inputType="textPersonName"
         />
     <EditText
         android:layout_width="0dp"
@@ -60,6 +79,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et3"
+        android:autofillHints=""
+        android:inputType="textPersonName"
         />
 
     <Button
