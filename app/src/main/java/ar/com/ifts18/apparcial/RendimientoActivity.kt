@@ -31,9 +31,8 @@ class RendimientoActivity: AppCompatActivity() {
 
             }
         }
-    fun mostrarResultados(){
-        resultadosTextView.text = resultadosFormateados
-    }
+    //val mostrarResultado =
+
     private fun calcularResultados() {
         // Función para validar que un valor sea un número positivo
         fun validarMonto(monto: String?): Double {
@@ -48,9 +47,11 @@ class RendimientoActivity: AppCompatActivity() {
         }
 
         try {
+            Toast.makeText(this,"llegue al try" , Toast.LENGTH_SHORT).show()
             val montoInvertir = validarMonto(montoInvertirEditText.text.toString())
             val montoBanco = validarMonto(montoBancoEditText.text.toString())
             val tiempoPlazoFijo = validarMonto(tiempoPlazoFijoEditText.text.toString()).toInt() // Convertimos a Int
+            Toast.makeText(this,"$tiempoPlazoFijo" , Toast.LENGTH_SHORT).show()
 
             // ... Resto de los cálculos
 
@@ -59,7 +60,7 @@ class RendimientoActivity: AppCompatActivity() {
             val interesesGanados = null
             val montoTotal = null
 
-            val resultadosFormateados = """
+           /* val resultadosFormateados = """
             Monto a Invertir: $${"%.2f".format(montoInvertir)}
             Monto en el Banco: $${"%.2f".format(montoBanco)}
             Tiempo Plazo Fijo: $tiempoPlazoFijo meses
@@ -67,10 +68,11 @@ class RendimientoActivity: AppCompatActivity() {
             Monto Total en el Banco: $${"%.2f".format(montoTotal)}
             ROI: $${"%.2f".format(roi)}%
             TNA: $${"%.2f".format(tna)}%
-        """.trimIndent()
+        """.trimIndent() */
+            Toast.makeText(this,"$resultadosTextView" , Toast.LENGTH_SHORT).show()
 
             // Mostrar los resultados en un TextView o cualquier otro elemento de la UI
-            resultadosTextView.text = resultadosFormateados
+            resultadosTextView.text = "holamundo"
 
         } catch (e: IllegalArgumentException) {
             // Mostrar un mensaje de error al usuario
