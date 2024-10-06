@@ -27,17 +27,64 @@
         android:layout_below="@id/textViewWelcome"
         android:layout_above="@id/buttonRegresar"
         android:layout_marginTop="16dp"
-        app:menu="@menu/navigation_menu"/>
-
-    <!-- ListView dentro de la navegación aca se pone lo que llega de las consultas de los ultimos usuarios-->
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewWelcome"
-        android:layout_above="@id/buttonRegresar"/>
-
-    <!-- Botón de regresar abajo -->
+        app:menu="@menu/navigation_menu">
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+            <TableLayout
+                android:layout_width="100dp"
+                android:layout_height="550dp"
+                android:orientation="horizontal">
+                <TableRow>
+                    <TableLayout>
+                        <TextView
+                            android:layout_column="2"
+                            android:text="NOMBRE"
+                            android:padding="10dp"/>
+                        <ListView
+                            android:id="@+id/columnNombre"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none"/>
+                    </TableLayout>
+                    <TableLayout>
+                        <TextView
+                            android:layout_column="3"
+                            android:text="APELLIDO"
+                            android:padding="10dp"/>
+                        <ListView
+                            android:id="@+id/columnApellido"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none"/>
+                    </TableLayout>
+                    <TableLayout>
+                        <TextView
+                            android:layout_column="4"
+                            android:text="TIPO INVERSOR"
+                            android:padding="10dp"/>
+                        <ListView
+                            android:id="@+id/columnInversor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none"/>
+                    </TableLayout>
+                    <TableLayout>
+                        <TextView
+                            android:layout_column="2"
+                            android:text="MONTO"
+                            android:padding="10dp"/>
+                        <ListView
+                            android:id="@+id/columnMonto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none" />
+                    </TableLayout>
+                </TableRow>
+            </TableLayout>
+        </HorizontalScrollView>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
     <Button
         android:id="@+id/buttonRegresar"
         android:layout_width="wrap_content"
@@ -48,4 +95,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"/>
 
+
 </RelativeLayout>
+
