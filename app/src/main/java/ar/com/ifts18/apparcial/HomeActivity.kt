@@ -20,8 +20,7 @@ class HomeActivity: AppCompatActivity() {
         val etMonto = findViewById<EditText>(R.id.et1)
         val etPlazoEnDias = findViewById<EditText>(R.id.et2)
        // val TipoDeInversion = findViewById<EditText>(R.id.et4)
-        val monto:Int? = etMonto.text.toString().toIntOrNull()
-        val PlazoEndias:Int? = etPlazoEnDias.text.toString().toIntOrNull()
+
        // val tipoDeInversion = TipoDeInversion.text.toString()
 
         val tvNumero2 = findViewById<TextView>(R.id.tvNumero2)
@@ -72,14 +71,15 @@ class HomeActivity: AppCompatActivity() {
         }
 
         botonCalcularRendimiento.setOnClickListener{
+            val monto:Int? = etMonto.text.toString().toIntOrNull()
+            val PlazoEndias:Int? = etPlazoEnDias.text.toString().toIntOrNull()
 
-            mostrarToast("$monto")
             val entradaDeBanco = spinnerBanco.selectedItem.toString()
             val entradaDeInversion = spinnerInversion.selectedItem.toString()
-            if(monto==0){
-                mostrarToast("El valor no puede ser cero")
-            }else if(PlazoEndias==0){
-                mostrarToast("El plazo no puede ser cero")
+            if(monto==0 || etMonto.text.isEmpty()){
+                mostrarToast("El monto no puede ser cero ni vacio")
+            }else if(PlazoEndias==0 || etPlazoEnDias.text.isEmpty()){
+                mostrarToast("El plazo no puede ser cero ni vacio")
             }else {
 
                 mostrarToast("$monto para $PlazoEndias de $entradaDeBanco para $entradaDeInversion")
