@@ -22,12 +22,17 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
     <string name="aceptar">Aceptar</string>
     <string name="denegar">Denegar</string>
 
+
+    <string name="elija_banco">Elija un banco</string>
+    <string name="elija_inversion">Elija un tipo de Inversion</string>
     <string-array name="entradaBanco">
+        <item>@string/elija_banco</item>
         <item>BNA</item>
         <item>STR</item>
         <item>ICBC</item>
     </string-array>
     <string-array name="entradaInversion">
+        <item>@string/elija_inversion</item>
         <item>plazo fijo</item>
         <item>FCI</item>
     </string-array>

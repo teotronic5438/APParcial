@@ -76,12 +76,21 @@ class HomeActivity: AppCompatActivity() {
 
             val entradaDeBanco = spinnerBanco.selectedItem.toString()
             val entradaDeInversion = spinnerInversion.selectedItem.toString()
-            if(monto==0 || etMonto.text.isEmpty()){
-                mostrarToast("El monto no puede ser cero ni vacio")
-            }else if(PlazoEndias==0 || etPlazoEnDias.text.isEmpty()){
-                mostrarToast("El plazo no puede ser cero ni vacio")
-            }else {
 
+            // Validaciones previas al envio del form
+            if(etMonto.text.isEmpty()) {
+                mostrarToast("El Monto no puede quedar vacio")
+            }else if(monto==0) {
+                mostrarToast("El monto no puede ser cero")
+            }else if(etPlazoEnDias.text.isEmpty()) {
+                mostrarToast("El plazo de Diaz no puede estar vacio")
+            } else if(PlazoEndias==0){
+                mostrarToast("El plazo no puede ser cero")
+            }else if(entradaDeBanco == getString(R.string.elija_banco)) {
+                mostrarToast("Seleccione uno de los bancos")
+            }else if(entradaDeInversion == getString(R.string.elija_inversion)) {
+                mostrarToast("Seleccione una de las inversiones propuestas")
+            }else {
                 mostrarToast("$monto para $PlazoEndias de $entradaDeBanco para $entradaDeInversion")
                 //irARendimiento()
                 // mostrarToast(fullinfo.toString())
