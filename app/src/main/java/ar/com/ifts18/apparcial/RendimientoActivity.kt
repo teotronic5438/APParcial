@@ -56,6 +56,9 @@ class RendimientoActivity: AppCompatActivity() {
         tvROI.text = "${String.format("%.2f", ROIcalculado)} %"
         tvTNA.text = "43 %" // POR AHORA HARDCODEADO
 
+        // Luego de mostrar los datos, guardo el historial en SharedPreferences
+        guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
+
         // Luego de mostrar datos Vuelvo a simulador
         btnVolverSimulador.setOnClickListener {
             irASimulador()
@@ -83,5 +86,69 @@ class RendimientoActivity: AppCompatActivity() {
     }
     private fun mostrarToast(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun guardarEnHistorialPreferences(montoDouble: Double, plazoInt: Int, bancoString: String, interesGanado: Double, ROIcalculado: Double) {
+        val historialPreferences = getSharedPreferences("HistorialPreferences", Context.MODE_PRIVATE)
+        val editor = historialPreferences.edit()
+
+        // Recuperamos las listas existentes (si no existen, se inicializan como vacías)
+        val listaMontos = historialPreferences.getStringSet("montos", mutableSetOf())?.toMutableSet()
+        val listaPlazos = historialPreferences.getStringSet("plazos", mutableSetOf())?.toMutableSet()
+        val listaBancos = historialPreferences.getStringSet("bancos", mutableSetOf())?.toMutableSet()
+        val listaIntereses = historialPreferences.getStringSet("intereses", mutableSetOf())?.toMutableSet()
+        val listaROIs = historialPreferences.getStringSet("rois", mutableSetOf())?.toMutableSet()
+
+        // Convertir los valores actuales en strings para almacenarlos en los sets
+        val montoString = montoDouble.toString()
+        val plazoString = plazoInt.toString()
+        val interesString = String.format("%.2f", interesGanado)
+        val roiString = String.format("%.2f", ROIcalculado)
+
+        // Mantenemos un límite de 5 registros
+        if (listaMontos != null) {
+            if (listaMontos.size >= 5) {
+                listaMontos.remove(listaMontos.first())
+                if (listaPlazos != null) {
+                    listaPlazos.remove(listaPlazos.first())
+                }
+                if (listaBancos != null) {
+                    listaBancos.remove(listaBancos.first())
+                }
+                if (listaIntereses != null) {
+                    listaIntereses.remove(listaIntereses.first())
+                }
+                if (listaROIs != null) {
+                    listaROIs.remove(listaROIs.first())
+                }
+            }
+        }
+
+        // Agregamos los nuevos datos a las listas
+        if (listaMontos != null) {
+            listaMontos.add(montoString)
+        }
+        if (listaPlazos != null) {
+            listaPlazos.add(plazoString)
+        }
+        if (listaBancos != null) {
+            listaBancos.add(bancoString)
+        }
+        if (listaIntereses != null) {
+            listaIntereses.add(interesString)
+        }
+        if (listaROIs != null) {
+            listaROIs.add(roiString)
+        }
+
+        // Guardamos las listas actualizadas en SharedPreferences
+        editor.putStringSet("montos", listaMontos)
+        editor.putStringSet("plazos", listaPlazos)
+        editor.putStringSet("bancos", listaBancos)
+        editor.putStringSet("intereses", listaIntereses)
+        editor.putStringSet("rois", listaROIs)
+
+        // Aplicar cambios
+        editor.apply()
     }
 }

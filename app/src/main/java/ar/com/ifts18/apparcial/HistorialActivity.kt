@@ -27,11 +27,22 @@ class HistorialActivity: AppCompatActivity() {
 
 
         listaDatos = arrayListOf()
-        //ID DE COLUMNAS
+        //ID DE COLUMNAS RELACIONADAS CON CADA VIEW
         val columnName = findViewById<ListView>(R.id.columnNombre)
         val columnLastName = findViewById<ListView>(R.id.columnApellido)
         val columnInversor = findViewById<ListView>(R.id.columnInversor)
         val columnMonto = findViewById<ListView>(R.id.columnMonto)
+
+        // Recuperamos las listas almacenadas en las SharedPreferences
+        val historialPreferences = getSharedPreferences("HistorialPreferences", MODE_PRIVATE)
+
+        val listaMontos = historialPreferences.getStringSet("montos", mutableSetOf())?.toList() ?: listOf()
+        val listaPlazos = historialPreferences.getStringSet("plazos", mutableSetOf())?.toList() ?: listOf()
+        val listaBancos = historialPreferences.getStringSet("bancos", mutableSetOf())?.toList() ?: listOf()
+        val listaIntereses = historialPreferences.getStringSet("intereses", mutableSetOf())?.toList() ?: listOf()
+        val listaROIs = historialPreferences.getStringSet("rois", mutableSetOf())?.toList() ?: listOf()
+
+        // HASTA AQUI LISTADO DE DATOS CDE NUEVO SHARED PREFERENCES
 
         //LISTAS
         val listaName = arrayListOf<String>()
