@@ -21,4 +21,14 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
     <string name="terminos_y_condiciones">Terminos y Condiciones</string>
     <string name="aceptar">Aceptar</string>
     <string name="denegar">Denegar</string>
+
+    <string-array name="entradaBanco">
+        <item>BNA</item>
+        <item>STR</item>
+        <item>ICBC</item>
+    </string-array>
+    <string-array name="entradaInversion">
+        <item>plazo fijo</item>
+        <item>FCI</item>
+    </string-array>
 </resources>

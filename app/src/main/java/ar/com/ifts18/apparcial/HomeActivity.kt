@@ -19,10 +19,10 @@ class HomeActivity: AppCompatActivity() {
         //Para validar datos ingresados
         val etMonto = findViewById<EditText>(R.id.et1)
         val etPlazoEnDias = findViewById<EditText>(R.id.et2)
-        val TipoDeInversion = findViewById<EditText>(R.id.et4)
-        val monto = etMonto.text.toString()
-        val PlazoEndias = etPlazoEnDias.text.toString()
-        val tipoDeInversion = TipoDeInversion.text.toString()
+       // val TipoDeInversion = findViewById<EditText>(R.id.et4)
+        val monto:Int? = etMonto.text.toString().toIntOrNull()
+        val PlazoEndias:Int? = etPlazoEnDias.text.toString().toIntOrNull()
+       // val tipoDeInversion = TipoDeInversion.text.toString()
 
         val tvNumero2 = findViewById<TextView>(R.id.tvNumero2)
 
@@ -34,26 +34,58 @@ class HomeActivity: AppCompatActivity() {
 
 
        //para el spinner
-        val bancos = arrayOf("Ingrese un banco", "BNA", "STR", "ICBC")
+       /* val bancos = arrayOf("Ingrese un banco", "BNA", "STR", "ICBC")
         val tasasInteres = mapOf("BNA" to 43.0, "STR" to 42.0, "ICBC" to 41.0)
         val bancoSpinner: Spinner = findViewById(R.id.banco_spinner)
 
         // adaptador para el spinner
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, bancos)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        bancoSpinner.adapter = adapter
+        bancoSpinner.adapter = adapter */
 
         val botonHistorial = findViewById<Button>(R.id.btVerHistorial)
         val botonSalir = findViewById<Button>(R.id.btSalir)
         val botonCalcularRendimiento = findViewById<Button>(R.id.btCalcularRendimiento)
 
         val hTasaInteres = misPreferencias.getString("tasaInteres", "NO")
-        val fullinfo = "$hNombre $hUsername $hTasaInteres"
+       // val fullinfo = "$hNombre $hUsername $hTasaInteres"
+
+        val spinnerBanco = findViewById<Spinner>(R.id.banco_spinner)
+        val spinnerInversion = findViewById<Spinner>(R.id.inversion_spinner)
+
+        //CREAMOS EL ARRAY DEL ADAPTER del BANCO
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.entradaBanco,
+            android.R.layout.simple_spinner_item
+        ).also { adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            spinnerBanco.adapter = adapter
+        }
+
+        //CREAMOS EL ARRAY DEL ADAPTER de la INVERSION
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.entradaInversion,
+            android.R.layout.simple_spinner_item
+        ).also { adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            spinnerInversion.adapter = adapter
+        }
 
         botonCalcularRendimiento.setOnClickListener{
-                mostrarToast("ir a rendimiento")
-                irARendimiento()
-                mostrarToast(fullinfo.toString())
+
+            mostrarToast("$monto")
+            val entradaDeBanco = spinnerBanco.selectedItem.toString()
+            val entradaDeInversion = spinnerInversion.selectedItem.toString()
+            if(monto==0){
+                mostrarToast("El valor no puede ser cero")
+            }else if(PlazoEndias==0){
+                mostrarToast("El plazo no puede ser cero")
+            }else {
+
+                mostrarToast("$monto para $PlazoEndias de $entradaDeBanco para $entradaDeInversion")
+                //irARendimiento()
+                // mostrarToast(fullinfo.toString())
+            }
         }
 
 
