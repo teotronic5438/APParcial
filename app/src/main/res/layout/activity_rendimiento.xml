@@ -7,11 +7,12 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/tvTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/felicidades_carlos"
         android:gravity="center_horizontal"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:layout_margin="16dp"
         />
 
