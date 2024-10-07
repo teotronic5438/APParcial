@@ -25,6 +25,15 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
 
     <string name="elija_banco">Elija un banco</string>
     <string name="elija_inversion">Elija un tipo de Inversion</string>
+    <string name="tu_monto_a_retirar_sera_de">Tu monto a retirar sera de:</string>
+    <string name="prueba">$prueba</string>
+    <string name="invertiste">Invertiste:</string>
+    <string name="en_el_banco">En el banco:</string>
+    <string name="felicidades_carlos">Felicidades $Carlos</string>
+    <string name="a_un_plazo_de">A un plazo de:</string>
+    <string name="los_interese_ganados_son_de">Los interese ganados son de:</string>
+    <string name="volver_a_simulador">Volver a Simulador</string>
+    <string name="el_tna_del_banco_es">El TNA del banco es:</string>
     <string-array name="entradaBanco">
         <item>@string/elija_banco</item>
         <item>BNA</item>
