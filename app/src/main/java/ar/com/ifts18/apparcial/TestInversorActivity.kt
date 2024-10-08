@@ -133,7 +133,7 @@ class TestInversorActivity : AppCompatActivity() {
             misPreferencias.edit().apply {
 
                 putString("perfil", perfil)
-                putBoolean("EstaLogueado", true)
+                putBoolean("testCompletado", true)
                 apply()
             }
             irAHomeActivity()

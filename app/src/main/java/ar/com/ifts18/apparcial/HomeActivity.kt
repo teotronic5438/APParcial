@@ -118,6 +118,11 @@ class HomeActivity: AppCompatActivity() {
         startActivity(intent) }
 
     private fun irAInicio(){
+        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        misPreferencias.edit().apply {
+            putBoolean("estaLogeado", false)
+            apply()
+        }
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()

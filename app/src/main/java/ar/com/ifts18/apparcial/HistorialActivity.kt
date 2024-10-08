@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class HistorialActivity: AppCompatActivity() {
@@ -13,20 +14,21 @@ class HistorialActivity: AppCompatActivity() {
         setContentView(R.layout.activity_historial)
 
         // aqui va el codigo
+        /*
         val LIMITE_LISTA = 5
         var listaDatos: ArrayList<String>
         var adapter: ArrayAdapter<String>
-
+        */
 
         val misPreferencias = getSharedPreferences("MyPreferences", MODE_PRIVATE)
         val hNombre = misPreferencias.getString("username", null)
         val hUsername = misPreferencias.getString("userlastname", null)
         val hPerfil = misPreferencias.getString("perfil", "moderado")
         val hMonto = misPreferencias.getString("monto", "0")
-        val fullinfo = "$hNombre $hUsername $hPerfil $hMonto"
+        // val fullinfo = "$hNombre $hUsername $hPerfil $hMonto"
 
 
-        listaDatos = arrayListOf()
+        // listaDatos = arrayListOf()
         //ID DE COLUMNAS RELACIONADAS CON CADA VIEW
         val columnName = findViewById<ListView>(R.id.columnNombre)
         val columnLastName = findViewById<ListView>(R.id.columnApellido)
@@ -41,26 +43,33 @@ class HistorialActivity: AppCompatActivity() {
         val listaBancos = historialPreferences.getStringSet("bancos", mutableSetOf())?.toList() ?: listOf()
         val listaIntereses = historialPreferences.getStringSet("intereses", mutableSetOf())?.toList() ?: listOf()
         val listaROIs = historialPreferences.getStringSet("rois", mutableSetOf())?.toList() ?: listOf()
-
-        // HASTA AQUI LISTADO DE DATOS CDE NUEVO SHARED PREFERENCES
-
+        val listaNombres = historialPreferences.getStringSet("nombres", mutableSetOf())?.toList() ?: listOf()
+        val listaApellidos = historialPreferences.getStringSet("apellidos", mutableSetOf())?.toList() ?: listOf()
+        val listaTiposInversor = historialPreferences.getStringSet("tiposInversor", mutableSetOf())?.toList() ?: listOf()
+        // HASTA AQUI LISTADO DE DATOS DE NUEVO SHARED PREFERENCES
+        mostrarToast("$listaPlazos")
         //LISTAS
+        /*
         val listaName = arrayListOf<String>()
         val listaLastName = arrayListOf<String>()
         val listColumnInversor = arrayListOf<String>()
         val listMonto = arrayListOf<String>()
+        */
 
         //AGREGAR VALORES A LA LISTA
+        /*
         listaName.add(hNombre ?: "N/A")
         listaLastName.add(hUsername ?: "N/A")
         listColumnInversor.add(hPerfil ?: "N/A")
         listMonto.add(hMonto ?: "N/A")
+        */
 
-        //ADAPTAR CAMBIOS A LAS COLUMNAS
-        val adapterName = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaName)
-        val adapterLastName = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaLastName)
-        val adapterInversor = ArrayAdapter(this, android.R.layout.simple_list_item_1, listColumnInversor)
-        val adapterMonto = ArrayAdapter(this, android.R.layout.simple_list_item_1, listMonto)
+
+        //ADAPTAR CAMBIOS A LAS COLUMNAS USANDO LOS NUEVOS DATOS DE SHARED PREFERENCE
+        val adapterName = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaNombres)
+        val adapterLastName = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaApellidos)
+        val adapterInversor = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaTiposInversor)
+        val adapterMonto = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaMontos)
         columnName.adapter = adapterName
         columnLastName.adapter = adapterLastName
         columnInversor.adapter = adapterInversor
@@ -76,11 +85,11 @@ class HistorialActivity: AppCompatActivity() {
 
         val buttonRegresar = findViewById<Button>(R.id.buttonRegresar)
         buttonRegresar.setOnClickListener {
-            irAlMain()
+            irAlSimulador()
             // Regresa a MainActivity
             //finish() // regresar al main para que ingrese otro usuario sus datos
         }
-
+        /*
         fun agregarElemento(lista: ArrayList<String>, nuevoValor: String, adapter: ArrayAdapter<String>) {
             if (lista.size >= 5) {
                 // Elimina el primer elemento para hacer espacio al nuevo
@@ -92,9 +101,15 @@ class HistorialActivity: AppCompatActivity() {
             // Notifica al adaptador que los datos han cambiado
             adapter.notifyDataSetChanged()
         }
+         */
     }
-    private fun irAlMain() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun irAlSimulador() {
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
+        finish()
+    }
+
+    private fun mostrarToast(mensajeToast: String){
+        Toast.makeText(this, mensajeToast, Toast.LENGTH_LONG).show()
     }
 }

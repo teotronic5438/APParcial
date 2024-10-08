@@ -39,7 +39,14 @@ class RendimientoActivity: AppCompatActivity() {
         val bancoString = intent.getStringExtra("BANCO_STRING") ?: "Banco Amanecer"
         val inversionString = intent.getStringExtra("INVERSION_STRING") ?: "Plazo Fijo Futurama"
 
+        /*
+        val montoString = montoDouble.toString()
         // Pruebo si llegan los parametros BORRAR DESPUES
+        misPreferencias.edit().apply{
+            putString("monto", "0")
+            apply()
+        }
+        */
 
 
 
@@ -89,6 +96,14 @@ class RendimientoActivity: AppCompatActivity() {
     }
 
     private fun guardarEnHistorialPreferences(montoDouble: Double, plazoInt: Int, bancoString: String, interesGanado: Double, ROIcalculado: Double) {
+        // Recupero los datos de usuario de Shared "MyPreferences"
+        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val nombre = misPreferencias.getString("username", "N/A")
+        val apellido = misPreferencias.getString("userlastname", "N/A")
+        val tipoInversor = misPreferencias.getString("perfil", "N/A")
+        // val montoUser = misPreferencias.getString("monto", "0")
+
+        // Defino un nuevo Shared Preference para guardar los datos en historial
         val historialPreferences = getSharedPreferences("HistorialPreferences", Context.MODE_PRIVATE)
         val editor = historialPreferences.edit()
 
@@ -98,6 +113,12 @@ class RendimientoActivity: AppCompatActivity() {
         val listaBancos = historialPreferences.getStringSet("bancos", mutableSetOf())?.toMutableSet()
         val listaIntereses = historialPreferences.getStringSet("intereses", mutableSetOf())?.toMutableSet()
         val listaROIs = historialPreferences.getStringSet("rois", mutableSetOf())?.toMutableSet()
+
+        // Recuperamos las listas existentes para estos datos adicionales
+        val listaNombres = historialPreferences.getStringSet("nombres", mutableSetOf())?.toMutableSet()
+        val listaApellidos = historialPreferences.getStringSet("apellidos", mutableSetOf())?.toMutableSet()
+        val listaTipoInversor = historialPreferences.getStringSet("tiposInversor", mutableSetOf())?.toMutableSet()
+        // val listaMontosUser = historialPreferences.getStringSet("montosUser", mutableSetOf())?.toMutableSet()
 
         // Convertir los valores actuales en strings para almacenarlos en los sets
         val montoString = montoDouble.toString()
@@ -121,8 +142,18 @@ class RendimientoActivity: AppCompatActivity() {
                 if (listaROIs != null) {
                     listaROIs.remove(listaROIs.first())
                 }
+                if (listaNombres != null) {
+                    listaNombres.remove(listaNombres.first())
+                }
+                if (listaApellidos != null) {
+                    listaApellidos.remove(listaApellidos.first())
+                }
+                if (listaTipoInversor != null) {
+                    listaTipoInversor.remove(listaTipoInversor.first())
+                }
             }
         }
+
 
         // Agregamos los nuevos datos a las listas
         if (listaMontos != null) {
@@ -140,6 +171,15 @@ class RendimientoActivity: AppCompatActivity() {
         if (listaROIs != null) {
             listaROIs.add(roiString)
         }
+        if (listaNombres != null) {
+            listaNombres.add(nombre)
+        }
+        if (listaApellidos != null) {
+            listaApellidos.add(apellido)
+        }
+        if(listaTipoInversor != null) {
+            listaTipoInversor.add(tipoInversor)
+        }
 
         // Guardamos las listas actualizadas en SharedPreferences
         editor.putStringSet("montos", listaMontos)
@@ -147,7 +187,9 @@ class RendimientoActivity: AppCompatActivity() {
         editor.putStringSet("bancos", listaBancos)
         editor.putStringSet("intereses", listaIntereses)
         editor.putStringSet("rois", listaROIs)
-
+        editor.putStringSet("nombres", listaNombres)
+        editor.putStringSet("apellidos", listaApellidos)
+        editor.putStringSet("tiposInversor", listaTipoInversor)
         // Aplicar cambios
         editor.apply()
     }
