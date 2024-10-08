@@ -189,24 +189,28 @@
     android:layout_margin="10dp"
 
     >
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancelar"
-        android:padding="12dp"
         android:layout_margin="8dp"
         android:textSize="16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_gradient"
+        android:padding="10dp"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Guardar"
         android:layout_margin="8dp"
-        android:padding="12dp"
         android:textSize="16dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_gradient"
+        android:padding="10dp"
         />
 </LinearLayout>
 </LinearLayout>

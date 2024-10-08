@@ -89,34 +89,5 @@
         />
 
 
-    <!-- SOLO PARA PRUEBAS DESPUES VUELA -->
-    <Button
-        android:id="@+id/pruebasAHome"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Solo para pruebas HOME"
-        />
-    <!-- SOLO PARA PRUEBAS DESPUES VUELA -->
-
-    <!-- SOLO PARA PRUEBAS DESPUES VUELA -->
-    <Button
-        android:id="@+id/pruebasARendimiento"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Solo para RENDIMIENTO"
-        />
-    <!-- SOLO PARA PRUEBAS DESPUES VUELA -->
-
-    <!-- SOLO PARA PRUEBAS DESPUES VUELA -->
-    <Button
-        android:id="@+id/pruebasAHistorial"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Solo para HISTORIAL"
-        />
-    <!-- SOLO PARA PRUEBAS DESPUES VUELA -->
 
 </LinearLayout>

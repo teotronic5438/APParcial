@@ -228,13 +228,16 @@
         android:layout_marginBottom="10dp"
         android:lineSpacingExtra="4dp"
         />
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnVolverSimulador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/volver_a_simulador"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_gradient"
+        android:padding="10dp"
         />
 
 
