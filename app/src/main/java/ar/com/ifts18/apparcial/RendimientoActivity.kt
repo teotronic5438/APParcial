@@ -51,7 +51,7 @@ class RendimientoActivity: AppCompatActivity() {
         bancos["Banco Santander"] = 33.0
         bancos["Banco Galicia"] = 37.5 // prueba 43.0
         bancos["Banco BBVA"] = 35.5
-        bancos["Banco HSBC"] = 50.0 // 37.0
+        bancos["Banco HSBC"] = 37.0 // 37.0
 
 
         /*
@@ -130,7 +130,7 @@ class RendimientoActivity: AppCompatActivity() {
         // castear TNA A DOUBLE
         // val TNA = 43.0
         val ganancia = montoDouble * ((tnaBanco / 100) / 360) * plazoInt
-        mostrarToast("$ganancia")
+        // mostrarToast("$ganancia")    // mostrando solo ganancia si llegue hasta aqui SOY FELIZ
         return ganancia
     }
 
@@ -195,7 +195,7 @@ Inversion elegida: $inversionString"
         editor.apply()
 
         // Opcional: Mostrar un toast con el registro nuevo
-        mostrarToast("Registro guardado: $nuevoRegistro")
+        // mostrarToast("Registro guardado: $nuevoRegistro")
     }
 
     /*
