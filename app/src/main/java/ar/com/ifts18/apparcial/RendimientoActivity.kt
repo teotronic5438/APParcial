@@ -39,32 +39,49 @@ class RendimientoActivity: AppCompatActivity() {
         val bancoString = intent.getStringExtra("BANCO_STRING") ?: "Banco Amanecer"
         val inversionString = intent.getStringExtra("INVERSION_STRING") ?: "Plazo Fijo Futurama"
 
-        /*
-        val montoString = montoDouble.toString()
-        // Pruebo si llegan los parametros BORRAR DESPUES
-        misPreferencias.edit().apply{
-            putString("monto", "0")
-            apply()
+
+        // Crear un listado con todos los bancos
+
+
+        val bancos: MutableMap<String, Double> = mutableMapOf()
+
+        // Agregar registros al listado
+        bancos["Banco Nacion"] = 39.0
+        bancos["Banco Santander"] = 33.0
+        bancos["Banco Galicia"] = 37.5
+        bancos["Banco BBVA"] = 35.5
+        bancos["Banco HSBC"] = 37.0
+
+
+        val tnaBanco: Double? = bancos[bancoString]
+
+
+        // Verifica si tnaBanco no es nulo antes de continuar
+        if (tnaBanco != null) {
+            // Imprimo resultados en Activity
+            val interesGanado = calcularGanancia(montoDouble, plazoInt, tnaBanco)
+            val valorFinal = montoDouble + interesGanado
+
+            tvMontoRetirar.text = "$ ${String.format("%.2f", valorFinal)}"
+            tvMontoInvertir.text = "$ ${montoDouble.toString()}"
+            tvBanco.text = bancoString
+            tvTiempoPlazoFijo.text = "${plazoInt.toString()} días"
+            tvInteresGanado.text = "$ ${String.format("%.2f", interesGanado)}"
+
+            val ROIcalculado = calcularROI(valorFinal, montoDouble)
+            tvROI.text = "${String.format("%.2f", ROIcalculado)} %"
+            tvTNA.text = tnaBanco.toString() // Mostrar TNA
+
+            // Guardar el historial en SharedPreferences (si lo necesitas)
+            // guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
+
+        } else {
+            // Manejo de error si no se encuentra el banco
+            mostrarToast("Banco no encontrado: $bancoString")
         }
-        */
-
-
-
-
-        // Imprimo resultados en Activity
-        val interesGanado = calcularGanancia(montoDouble, plazoInt)
-        val valorFinal = montoDouble + interesGanado
-        tvMontoRetirar.text = "$ ${String.format("%.2f", valorFinal)}"
-        tvMontoInvertir.text = "$ ${montoDouble.toString()}"
-        tvBanco.text = bancoString
-        tvTiempoPlazoFijo.text = "${plazoInt.toString()} dias"
-        tvInteresGanado.text = "$ ${String.format("%.2f", interesGanado)}"
-        val ROIcalculado = calcularROI(valorFinal, montoDouble)
-        tvROI.text = "${String.format("%.2f", ROIcalculado)} %"
-        tvTNA.text = "43 %" // POR AHORA HARDCODEADO
 
         // Luego de mostrar los datos, guardo el historial en SharedPreferences
-        guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
+        // guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
 
         // Luego de mostrar datos Vuelvo a simulador
         btnVolverSimulador.setOnClickListener {
@@ -72,11 +89,11 @@ class RendimientoActivity: AppCompatActivity() {
         }
     }
 
-    private fun calcularGanancia(montoDouble: Double, plazoInt: Int): Double {
+    private fun calcularGanancia(montoDouble: Double, plazoInt: Int, tnaBanco: Double): Double {
         // POR AHORA HARDCODEADO DESPUES CREAR TNA
         // castear TNA A DOUBLE
-        val TNA = 43.0
-        val ganancia = montoDouble * ((TNA / 100) / 360) * plazoInt
+        // val TNA = 43.0
+        val ganancia = montoDouble * ((tnaBanco / 100) / 360) * plazoInt
         mostrarToast("$ganancia")
         return ganancia
     }
@@ -95,6 +112,7 @@ class RendimientoActivity: AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 
+    /*
     private fun guardarEnHistorialPreferences(montoDouble: Double, plazoInt: Int, bancoString: String, interesGanado: Double, ROIcalculado: Double) {
         // Recupero los datos de usuario de Shared "MyPreferences"
         val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
@@ -193,4 +211,6 @@ class RendimientoActivity: AppCompatActivity() {
         // Aplicar cambios
         editor.apply()
     }
+    */
+
 }

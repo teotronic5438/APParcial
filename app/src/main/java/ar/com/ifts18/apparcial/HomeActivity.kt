@@ -31,13 +31,13 @@ class HomeActivity: AppCompatActivity() {
         val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
         val hNombre = misPreferencias.getString("username", "Admin")
 
+        val entradaDeInversion = "Plazo Fijo"
         // Muestro saludo de Bienvenida
         tvNumero2.text = "Bienvenido $hNombre"
 
 
         // Cargo Spinner para Banco y tipo de Inversion
         val spinnerBanco = findViewById<Spinner>(R.id.banco_spinner)
-        val spinnerInversion = findViewById<Spinner>(R.id.inversion_spinner)
 
         //CREAMOS EL ARRAY DEL ADAPTER del BANCO
         ArrayAdapter.createFromResource(
@@ -48,21 +48,12 @@ class HomeActivity: AppCompatActivity() {
             spinnerBanco.adapter = adapter
         }
 
-        //CREAMOS EL ARRAY DEL ADAPTER de la INVERSION
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.entradaInversion,
-            android.R.layout.simple_spinner_item
-        ).also { adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-            spinnerInversion.adapter = adapter
-        }
 
         botonCalcularRendimiento.setOnClickListener{
             val monto: Double? = etMonto.text.toString().toDoubleOrNull()
             val PlazoEndias:Int? = etPlazoEnDias.text.toString().toIntOrNull()
 
             val entradaDeBanco = spinnerBanco.selectedItem.toString()
-            val entradaDeInversion = spinnerInversion.selectedItem.toString()
 
             // Validaciones previas al envio del form
             if(etMonto.text.isEmpty()) {
@@ -75,13 +66,11 @@ class HomeActivity: AppCompatActivity() {
                 mostrarToast("El plazo no puede ser cero")
             }else if(entradaDeBanco == getString(R.string.elija_banco)) {
                 mostrarToast("Seleccione uno de los bancos")
-            }else if(entradaDeInversion == getString(R.string.elija_inversion)) {
-                mostrarToast("Seleccione una de las inversiones propuestas")
             }else {
                 // mostrarToast("$monto para $PlazoEndias de $entradaDeBanco para $entradaDeInversion")
 
                 val intent = Intent(this, RendimientoActivity::class.java).apply {
-                    //paso parametros
+                    //paso parametros a rendimiento
                     putExtra("MONTO_DOBLE", monto)
                     putExtra("PLAZO_INT", PlazoEndias)
                     putExtra("BANCO_STRING", entradaDeBanco)
@@ -96,20 +85,6 @@ class HomeActivity: AppCompatActivity() {
 
         botonSalir.setOnClickListener{ irAInicio() }
 
-        //Guardar en preferencias (para pasar a Jose)
-        /*
-        val misPreferenciasARendimiento = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-        misPreferenciasARendimiento.edit().apply {
-
-            putString("montoInvertir", "0")
-            putString("plazoDias", "0")
-            putString("banco", "banco")
-            putString("tipoInversion", "inversion")
-            putString("tasaInteres", "tasa")
-            apply()
-
-        }
-        */
 
     }
 
@@ -127,12 +102,7 @@ class HomeActivity: AppCompatActivity() {
         startActivity(intent)
         finish()
     }
-    /*
-    fun irARendimiento(){
-        val intent = Intent(this, RendimientoActivity::class.java)
-        startActivity(intent)
-    }
-    */
+
     private fun mostrarToast(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }

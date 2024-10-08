@@ -43,14 +43,9 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
     <string-array name="entradaBanco">
         <item>@string/elija_banco</item>
         <item>Banco Nacion</item>
-        <item>Banco Provincia</item>
-        <item>Galicia</item>
-        <item>ICBC</item>
-        <item>Santander</item>
-    </string-array>
-    <string-array name="entradaInversion">
-        <item>@string/elija_inversion</item>
-        <item>plazo fijo</item>
-        <item>FCI</item>
+        <item>Banco Santander</item>
+        <item>Banco Galicia</item>
+        <item>Banco BBVA</item>
+        <item>Banco HSBC</item>
     </string-array>
 </resources>

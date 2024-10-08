@@ -145,7 +145,7 @@ class TestInversorActivity : AppCompatActivity() {
             val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
             misPreferencias.edit().apply {
 
-                putBoolean("EstaLogueado", false)
+                putBoolean("testCompletado", false)
                 apply()
             }
 
