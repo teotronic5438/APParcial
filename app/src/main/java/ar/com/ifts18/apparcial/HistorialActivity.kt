@@ -3,12 +3,9 @@ package ar.com.ifts18.apparcial
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.view.View
 import android.widget.Button
-import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class HistorialActivity: AppCompatActivity() {
@@ -32,14 +29,13 @@ class HistorialActivity: AppCompatActivity() {
         if (hNombre != null) {
             if (hUsername != null) {
                 if (hPerfil != null) {
-                    tvDatosUsuario.text = "Hola ${hNombre.replaceFirstChar { it.titlecase() }} ${hUsername.replaceFirstChar { it.titlecase() }} su perfil es ${hPerfil.replaceFirstChar { it.titlecase() }}.\nEstas son sus ultimas consultas:"
+                    tvDatosUsuario.text = "Hola ${hNombre.uppercase()} ${hUsername.uppercase()} su perfil es ${hPerfil.uppercase()}"
                 }
             }
         }
 
         val historialPreferences = getSharedPreferences("historialPreferences", MODE_PRIVATE)
 
-        val contadorMax = historialPreferences.getInt("contador", 0)
 
         val historialRegistro: MutableMap<String, String> = mutableMapOf()
 
@@ -54,13 +50,7 @@ class HistorialActivity: AppCompatActivity() {
         val registro4 = historialPreferences.getString("historial4", "Sin registro")
         val registro5 = historialPreferences.getString("historial5", "Sin registro")
 
-        /*
-        if(contadorMax != 0){
-            for (i in 1..contadorMax) {
-                tvHistorial
-            }
-        }
-        */
+
         if(registro5 == "Sin registro"){
             tvHistorial5.visibility = View.GONE
         }
@@ -100,7 +90,4 @@ class HistorialActivity: AppCompatActivity() {
         finish()
     }
 
-    private fun mostrarToast(mensajeToast: String){
-        Toast.makeText(this, mensajeToast, Toast.LENGTH_LONG).show()
-    }
 }
