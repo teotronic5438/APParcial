@@ -34,6 +34,7 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
     <string name="los_interese_ganados_son_de">Interes ganado:</string>
     <string name="volver_a_simulador">Volver a Simulador</string>
     <string name="el_tna_del_banco_es">El TNA del banco es:</string>
+    <string name="el_roi_es">El ROI es de:</string>
     <string name="calcular_rendimiento">Calcular rendimiento</string>
     <string name="salir">Salir</string>
     <string name="ver_historial">Ver historial</string>

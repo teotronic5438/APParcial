@@ -26,6 +26,7 @@ class RendimientoActivity: AppCompatActivity() {
         val tvInteresGanado = findViewById<TextView>(R.id.tvInteresesGanados)
         val tvROI = findViewById<TextView>(R.id.tvROI)
         val tvTNA = findViewById<TextView>(R.id.tvTNA)
+        val tvRecomendacion = findViewById<TextView>(R.id.tvRecomendacion)
         val btnVolverSimulador = findViewById<Button>(R.id.btnVolverSimulador)
 
         // Traigo Shared Preferences para info usuario
@@ -48,9 +49,9 @@ class RendimientoActivity: AppCompatActivity() {
         // Agregar registros al listado
         bancos["Banco Nacion"] = 39.0
         bancos["Banco Santander"] = 33.0
-        bancos["Banco Galicia"] = 43.0 // 37.5
+        bancos["Banco Galicia"] = 37.5 // prueba 43.0
         bancos["Banco BBVA"] = 35.5
-        bancos["Banco HSBC"] = 37.0
+        bancos["Banco HSBC"] = 50.0 // 37.0
 
 
         /*
@@ -109,10 +110,14 @@ class RendimientoActivity: AppCompatActivity() {
             mostrarToast("Banco no encontrado: $bancoString")
         }
 
-
-
-        // Luego de mostrar los datos, guardo el historial en SharedPreferences
-        // guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
+        // Cálculo para el banco con la TNA más alta
+        val bancoConTnaMasAlta = obtenerBancoConTnaMasAlta(bancos)
+        // Destrucutring por separado
+        val (bancoTNAAlta, tasaTNAAlta) = bancoConTnaMasAlta
+        val gananciaMasAlta = calcularGanancia(montoDouble, plazoInt, tasaTNAAlta)
+        val valorFinalMasAlta = montoDouble + gananciaMasAlta
+        val roiMasAlto = calcularROI(montoDouble + gananciaMasAlta, montoDouble)
+        tvRecomendacion.text = "Para mayor rendimiendo puedes usar el $bancoTNAAlta que tiene una taza de ${String.format("%.2f", tasaTNAAlta)} %.\nTe daria una ganancia de $ ${String.format("%.2f", valorFinalMasAlta)}.\nCon un ROI de: ${String.format("%.2f", roiMasAlto)} %."
 
         // Luego de mostrar datos Vuelvo a simulador
         btnVolverSimulador.setOnClickListener {
@@ -132,6 +137,12 @@ class RendimientoActivity: AppCompatActivity() {
     private fun calcularROI(valorFinal: Double, montoDouble: Double) : Double{
         val roiCalculado = ( (valorFinal - montoDouble) / montoDouble ) * 100
         return roiCalculado
+    }
+
+    private fun obtenerBancoConTnaMasAlta(bancos: Map<String, Double>): Pair<String, Double> {
+        // Busca el banco con la mayor TNA
+        val bancoConTnaMasAlta = bancos.maxByOrNull { it.value }
+        return bancoConTnaMasAlta?.toPair() ?: Pair("No disponible", 0.0)
     }
 
     private fun irASimulador() {
