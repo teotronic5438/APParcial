@@ -48,16 +48,43 @@ class RendimientoActivity: AppCompatActivity() {
         // Agregar registros al listado
         bancos["Banco Nacion"] = 39.0
         bancos["Banco Santander"] = 33.0
-        bancos["Banco Galicia"] = 37.5
+        bancos["Banco Galicia"] = 43.0 // 37.5
         bancos["Banco BBVA"] = 35.5
         bancos["Banco HSBC"] = 37.0
 
+
+        /*
+
+        / Crear un listado con todos los bancos
+        val bancos = mutableListOf<Map<String, Map<String, Double>>>()
+
+        // Agregar registros al listado
+        bancos.add(mapOf("Nacion" to mapOf("plazoFijo" to 39.0, "FCI" to 56.0)))
+        bancos.add(mapOf("Santander" to mapOf("plazoFijo" to 33.0, "FCI" to 45.0)))
+        bancos.add(mapOf("Galicia" to mapOf("plazoFijo" to 37.5, "FCI" to 60.0)))
+        bancos.add(mapOf("BBVA" to mapOf("plazoFijo" to 35.5, "FCI" to 45.0)))
+        bancos.add(mapOf("HSBC" to mapOf("plazoFijo" to 37.0, "FCI" to 60.0)))
+
+        // Buscar el valor de tnaBanco
+        val tnaBanco: Double? = bancos.find { it.containsKey(bancoString) }
+            ?.get(bancoString)
+            ?.get(inversionString)
+
+        // Verificar el resultado y mostrar el valor
+        if (tnaBanco != null) {
+            println("La TNA de $bancoString para $inversionString es: $tnaBanco")
+        } else {
+            println("No se encontró información para el banco $bancoString y la inversión $inversionString.")
+        }
+
+        */
 
         val tnaBanco: Double? = bancos[bancoString]
 
 
         // Verifica si tnaBanco no es nulo antes de continuar
         if (tnaBanco != null) {
+
             // Imprimo resultados en Activity
             val interesGanado = calcularGanancia(montoDouble, plazoInt, tnaBanco)
             val valorFinal = montoDouble + interesGanado
@@ -73,12 +100,16 @@ class RendimientoActivity: AppCompatActivity() {
             tvTNA.text = tnaBanco.toString() // Mostrar TNA
 
             // Guardar el historial en SharedPreferences (si lo necesitas)
-            // guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
+            guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, valorFinal, ROIcalculado, inversionString)
+
+
 
         } else {
             // Manejo de error si no se encuentra el banco
             mostrarToast("Banco no encontrado: $bancoString")
         }
+
+
 
         // Luego de mostrar los datos, guardo el historial en SharedPreferences
         // guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
@@ -110,6 +141,41 @@ class RendimientoActivity: AppCompatActivity() {
     }
     private fun mostrarToast(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun guardarEnHistorialPreferences(montoDouble: Double, plazoInt: Int, bancoString: String, valorFinal: Double, ROIcalculado: Double, inversionString: String) {
+        // Inicializa el nuevo registro
+        val nuevoRegistro = "Monto invertido: $montoDouble \nPlazo elegido: $plazoInt \nBanco: $bancoString \nRecibiras: $valorFinal \nEl roi calculado: $ROIcalculado\nInversion elegida: $inversionString"
+
+        // Inicializa SharedPreferences
+        val historialGuardar = getSharedPreferences("historialPreferences", Context.MODE_PRIVATE)
+
+        // Obtén el número de registros actuales (limitar a 5)
+        val contadorRegistro = historialGuardar.getInt("contador", 0)
+
+        val editor = historialGuardar.edit()
+
+        // Si el contador es menor a 5, incrementa y guarda normalmente
+        if (contadorRegistro < 5) {
+            // Guardar el nuevo registro en la posición actual
+            editor.putString("historial${contadorRegistro + 1}", nuevoRegistro)
+            // Incrementar el contador
+            editor.putInt("contador", contadorRegistro + 1)
+        } else {
+            // Si ya hay 5 registros, desplaza todos los registros una posición hacia atrás
+            for (i in 1 until 5) {
+                val registroAnterior = historialGuardar.getString("historial${i + 1}", "")
+                editor.putString("historial$i", registroAnterior) // Mover el registro a la posición anterior
+            }
+            // Sobreescribir el último registro con el nuevo
+            editor.putString("historial5", nuevoRegistro)
+        }
+
+        // Aplicar los cambios
+        editor.apply()
+
+        // Opcional: Mostrar un toast con el registro nuevo
+        mostrarToast("Registro guardado: $nuevoRegistro")
     }
 
     /*

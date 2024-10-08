@@ -1,87 +1,90 @@
 package ar.com.ifts18.apparcial
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.view.View
 import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class HistorialActivity: AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)
 
-        // aqui va el codigo
-        /*
-        val LIMITE_LISTA = 5
-        var listaDatos: ArrayList<String>
-        var adapter: ArrayAdapter<String>
-        */
+        val tvHistorial1 = findViewById<TextView>(R.id.historial1)
+        val tvHistorial2 = findViewById<TextView>(R.id.historial2)
+        val tvHistorial3 = findViewById<TextView>(R.id.historial3)
+        val tvHistorial4 = findViewById<TextView>(R.id.historial4)
+        val tvHistorial5 = findViewById<TextView>(R.id.historial5)
+        val tvDatosUsuario = findViewById<TextView>(R.id.datosUsuario)
 
         val misPreferencias = getSharedPreferences("MyPreferences", MODE_PRIVATE)
         val hNombre = misPreferencias.getString("username", null)
         val hUsername = misPreferencias.getString("userlastname", null)
-        val hPerfil = misPreferencias.getString("perfil", "moderado")
-        val hMonto = misPreferencias.getString("monto", "0")
-        // val fullinfo = "$hNombre $hUsername $hPerfil $hMonto"
+        val hPerfil = misPreferencias.getString("perfil", null)
 
+        if (hNombre != null) {
+            if (hUsername != null) {
+                if (hPerfil != null) {
+                    tvDatosUsuario.text = "Hola ${hNombre.uppercase()} ${hUsername.uppercase()} su perfil es ${hPerfil.uppercase()}"
+                }
+            }
+        }
 
-        // listaDatos = arrayListOf()
-        //ID DE COLUMNAS RELACIONADAS CON CADA VIEW
-        val columnName = findViewById<ListView>(R.id.columnNombre)
-        val columnLastName = findViewById<ListView>(R.id.columnApellido)
-        val columnInversor = findViewById<ListView>(R.id.columnInversor)
-        val columnMonto = findViewById<ListView>(R.id.columnMonto)
+        val historialPreferences = getSharedPreferences("historialPreferences", MODE_PRIVATE)
 
-        // Recuperamos las listas almacenadas en las SharedPreferences
-        val historialPreferences = getSharedPreferences("HistorialPreferences", MODE_PRIVATE)
+        val contadorMax = historialPreferences.getInt("contador", 0)
 
-        val listaMontos = historialPreferences.getStringSet("montos", mutableSetOf())?.toList() ?: listOf()
-        val listaPlazos = historialPreferences.getStringSet("plazos", mutableSetOf())?.toList() ?: listOf()
-        val listaBancos = historialPreferences.getStringSet("bancos", mutableSetOf())?.toList() ?: listOf()
-        val listaIntereses = historialPreferences.getStringSet("intereses", mutableSetOf())?.toList() ?: listOf()
-        val listaROIs = historialPreferences.getStringSet("rois", mutableSetOf())?.toList() ?: listOf()
-        val listaNombres = historialPreferences.getStringSet("nombres", mutableSetOf())?.toList() ?: listOf()
-        val listaApellidos = historialPreferences.getStringSet("apellidos", mutableSetOf())?.toList() ?: listOf()
-        val listaTiposInversor = historialPreferences.getStringSet("tiposInversor", mutableSetOf())?.toList() ?: listOf()
-        // HASTA AQUI LISTADO DE DATOS DE NUEVO SHARED PREFERENCES
-        mostrarToast("$listaPlazos")
-        //LISTAS
+        val historialRegistro: MutableMap<String, String> = mutableMapOf()
+
+        historialRegistro["historial1"] = "registro1"
+        historialRegistro["historial2"] = "registro2"
+        historialRegistro["historial3"] = "registro3"
+
+        // Obtén los valores de SharedPreferences, y si no existen usa "Sin registro" como valor por defecto
+        val registro1 = historialPreferences.getString("historial1", "Sin registro")
+        val registro2 = historialPreferences.getString("historial2", "Sin registro")
+        val registro3 = historialPreferences.getString("historial3", "Sin registro")
+        val registro4 = historialPreferences.getString("historial4", "Sin registro")
+        val registro5 = historialPreferences.getString("historial5", "Sin registro")
+
         /*
-        val listaName = arrayListOf<String>()
-        val listaLastName = arrayListOf<String>()
-        val listColumnInversor = arrayListOf<String>()
-        val listMonto = arrayListOf<String>()
+        if(contadorMax != 0){
+            for (i in 1..contadorMax) {
+                tvHistorial
+            }
+        }
         */
+        if(registro5 == "Sin registro"){
+            tvHistorial5.visibility = View.GONE
+        }
+        if(registro4 == "Sin registro"){
+            tvHistorial4.visibility = View.GONE
+        }
+        if(registro3 == "Sin registro"){
+            tvHistorial3.visibility = View.GONE
+        }
+        if(registro2 == "Sin registro"){
+            tvHistorial2.visibility = View.GONE
+        }
+        if(registro1 == "Sin registro"){
+            tvHistorial1.visibility = View.GONE
+        }
+        // Asigna cada valor a su correspondiente TextView
+        tvHistorial1.text = registro1 ?: "Sin registro"
+        tvHistorial2.text = registro2 ?: "Sin registro"
+        tvHistorial3.text = registro3 ?: "Sin registro"
+        tvHistorial4.text = registro4 ?: "Sin registro"
+        tvHistorial5.text = registro5 ?: "Sin registro"
 
-        //AGREGAR VALORES A LA LISTA
-        /*
-        listaName.add(hNombre ?: "N/A")
-        listaLastName.add(hUsername ?: "N/A")
-        listColumnInversor.add(hPerfil ?: "N/A")
-        listMonto.add(hMonto ?: "N/A")
-        */
 
 
-        //ADAPTAR CAMBIOS A LAS COLUMNAS USANDO LOS NUEVOS DATOS DE SHARED PREFERENCE
-        val adapterName = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaNombres)
-        val adapterLastName = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaApellidos)
-        val adapterInversor = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaTiposInversor)
-        val adapterMonto = ArrayAdapter(this, android.R.layout.simple_list_item_1, listaMontos)
-        columnName.adapter = adapterName
-        columnLastName.adapter = adapterLastName
-        columnInversor.adapter = adapterInversor
-        columnMonto.adapter = adapterMonto
-
-
-        //agregarElemento(listaName, "NuevoNombre", adapterName)
-        //agregarElemento(listaLastName, "NuevoApellido", adapterLastName)
-        //agregarElemento(listColumnInversor, "NuevoPerfil", adapterInversor)
-        //agregarElemento(listMonto, "NuevoMonto", adapterMonto)
-
-        // Agregamos el nuevo elemento a la lista
 
         val buttonRegresar = findViewById<Button>(R.id.buttonRegresar)
         buttonRegresar.setOnClickListener {
@@ -89,19 +92,7 @@ class HistorialActivity: AppCompatActivity() {
             // Regresa a MainActivity
             //finish() // regresar al main para que ingrese otro usuario sus datos
         }
-        /*
-        fun agregarElemento(lista: ArrayList<String>, nuevoValor: String, adapter: ArrayAdapter<String>) {
-            if (lista.size >= 5) {
-                // Elimina el primer elemento para hacer espacio al nuevo
-                lista.removeAt(0)
-            }
-            // Añade el nuevo valor al final de la lista
-            lista.add(nuevoValor)
 
-            // Notifica al adaptador que los datos han cambiado
-            adapter.notifyDataSetChanged()
-        }
-         */
     }
     private fun irAlSimulador() {
         val intent = Intent(this, HomeActivity::class.java)

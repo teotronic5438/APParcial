@@ -19,6 +19,8 @@
     <li>Test del Inversor: Al instalar la aplicación por primera vez, se llevará a cabo el Test del Inversor. Este consistirá en preguntas de opción múltiple, de las cuales el grupo deberá seleccionar tres para mostrarlas en la aplicación (más información disponible en: <a href="https://www.bna.com.ar/Personas/TestDelInversor">https://www.bna.com.ar/Personas/TestDelInversor</a>). Además, se solicitará el nombre, apellido y correo electrónico del usuario, que se mostrarán en la pantalla de bienvenida.</li>
 </ol>
 
+<p>Acceso: <a href="https://www.figma.com/design/8ihcV8f2lTYUmOOIsKx7Ep/Untitled?node-id=0-1&t=JyMq1mwUu7tT64vE-1">Ir a Figma</a></p>
+
 ## Criterios de Evaluación
 <ul>
     <li>Funcionalidad Completa: La aplicación debe comparar dos inversiones.</li>
