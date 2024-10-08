@@ -33,6 +33,8 @@ class TestInversorActivity : AppCompatActivity() {
             val rbSeleccionado2 = rgOpciones2.checkedRadioButtonId
             val rbSeleccionado3 = rgOpciones3.checkedRadioButtonId
 
+            val errorAnswer = "Falta responder una o más preguntas"
+
             if (rbSeleccionado1 != -1) {
 
                 //Encontrar el RB correspondiente
@@ -118,21 +120,21 @@ class TestInversorActivity : AppCompatActivity() {
 
                         //TBD Se debe seleccionar un RB
                         Log.d("tag", "No answer for question 3")
-                        Toast.makeText(this, "No se seleccionó respuesta de la pregunta 3", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, errorAnswer, Toast.LENGTH_LONG).show()
                     }
 
                 } else {
 
                     //TBD Se debe seleccionar un RB
                     Log.d("tag", "No answer for question 2")
-                    Toast.makeText(this, "No se seleccionó respuesta de la pregunta 2", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, errorAnswer, Toast.LENGTH_LONG).show()
                 }
 
             } else {
 
                 //TBD Se debe seleccionar un RB
                 Log.d("tag", "No answer for question 1")
-                Toast.makeText(this, "No se seleccionó respuesta de la pregunta 1", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, errorAnswer, Toast.LENGTH_LONG).show()
             }
 
         }
