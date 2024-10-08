@@ -40,6 +40,8 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambiÃ
     <string name="ingrese_plazo_de_dias">Ingrese plazo de dias</string>
     <string name="ingrese_monto_a_invertir">Ingrese monto a invertir</string>
     <string name="que_inversi_n_desea_simular">Â¿Que inversiÃ²n desea simular?</string>
+    <string name="bienvenido_al_historial">Bienvenido al Historial</string>
+    <string name="volver_al_simulador">Volver al Simulador</string>
     <string-array name="entradaBanco">
         <item>@string/elija_banco</item>
         <item>Banco Nacion</item>
@@ -47,5 +49,10 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambiÃ
         <item>Banco Galicia</item>
         <item>Banco BBVA</item>
         <item>Banco HSBC</item>
+    </string-array>
+    <string-array name="entradaInversion">
+        <item>@string/elija_inversion</item>
+        <item>plazo fijo</item>
+        <item>FCI</item>
     </string-array>
 </resources>
