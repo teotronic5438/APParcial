@@ -74,14 +74,7 @@ class MainActivity : AppCompatActivity() {
         caja.isChecked = terminosAceptados
 
         // en este archivo guaddate la key estaLogeado en false y ademas guardala en yaSeLogueo
-        val yaSeLogueo = misPreferencias.getBoolean("estaLogeado", false)
-
-        if(yaSeLogueo){
-            // Si ya se logeo hizo test inversor => HOME activity
-            mostrarToast("Ya estas logeado")
-            irAHome()
-        }
-
+        val testCompletado = misPreferencias.getBoolean("testCompletado", false)
 
 
         // logica de validacion
@@ -90,6 +83,10 @@ class MainActivity : AppCompatActivity() {
             val nombre = etNombre.text.toString()
             val apellido = etApellido.text.toString()
             val correo = etCorreo.text.toString()
+
+            val usernameGuardado = misPreferencias.getString("username", null)
+            val userlastnameGuardado = misPreferencias.getString("userlastname", null)
+            val useremailGuardado = misPreferencias.getString("useremail", null)
 
             // Verifico que haya llenado todos los campos
             if (nombre.isEmpty()){
@@ -104,22 +101,33 @@ class MainActivity : AppCompatActivity() {
                 // Verifico que el checkbox de términos y condiciones está marcado
                 mostrarToast("Debes aceptar los términos y condiciones.")
             } else {
+                // Verifico si no hay usuario guardado
+                if (usernameGuardado != null && useremailGuardado != null) {
+                    // Verifico si el usuario actual coincide con el guardado
+                    if (usernameGuardado == nombre &&
+                        userlastnameGuardado == apellido &&
+                        useremailGuardado == correo && testCompletado) {
 
-                // si paso todas las validaciones
-                // 1) guardo info de usuario en shared preference
-                // si las credenciales son correctas => almaceno info en sharedPreferences
+                        // Si coincide, ir a la actividad Home
+                        mostrarToast("Ya estás logeado")
+                        irAHome()
+                        return@setOnClickListener
+                    }
+                }
+
+                // Guardar datos de usuario en SharedPreferences
                 misPreferencias.edit().apply {
-                    // actualizo estado de logeo y guardo solo credencial username
                     putString("username", nombre)
                     putString("userlastname", apellido)
                     putString("useremail", correo)
                     apply()
                 }
-                // 2) envio a test inversor
+
+                // Ir a Test Inversor
                 irATestInversor()
             }
-
         }
+
 
     }
     private fun irATerminosYCondiciones() {

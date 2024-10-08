@@ -1,5 +1,6 @@
 package ar.com.ifts18.apparcial
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class HomeActivity: AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -19,36 +21,21 @@ class HomeActivity: AppCompatActivity() {
         //Para validar datos ingresados
         val etMonto = findViewById<EditText>(R.id.et1)
         val etPlazoEnDias = findViewById<EditText>(R.id.et2)
-       // val TipoDeInversion = findViewById<EditText>(R.id.et4)
-
-       // val tipoDeInversion = TipoDeInversion.text.toString()
-
         val tvNumero2 = findViewById<TextView>(R.id.tvNumero2)
 
-        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-        val hNombre = misPreferencias.getString("username", null)
-        val hUsername = misPreferencias.getString("userlastname", null)
-
-        tvNumero2.text = "¡bienvenido " + hNombre + "!"
-
-
-       //para el spinner
-       /* val bancos = arrayOf("Ingrese un banco", "BNA", "STR", "ICBC")
-        val tasasInteres = mapOf("BNA" to 43.0, "STR" to 42.0, "ICBC" to 41.0)
-        val bancoSpinner: Spinner = findViewById(R.id.banco_spinner)
-
-        // adaptador para el spinner
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, bancos)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        bancoSpinner.adapter = adapter */
-
+        // Botones para la accion
         val botonHistorial = findViewById<Button>(R.id.btVerHistorial)
         val botonSalir = findViewById<Button>(R.id.btSalir)
         val botonCalcularRendimiento = findViewById<Button>(R.id.btCalcularRendimiento)
 
-        val hTasaInteres = misPreferencias.getString("tasaInteres", "NO")
-       // val fullinfo = "$hNombre $hUsername $hTasaInteres"
+        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val hNombre = misPreferencias.getString("username", "Admin")
 
+        // Muestro saludo de Bienvenida
+        tvNumero2.text = "Bienvenido $hNombre"
+
+
+        // Cargo Spinner para Banco y tipo de Inversion
         val spinnerBanco = findViewById<Spinner>(R.id.banco_spinner)
 
         //CREAMOS EL ARRAY DEL ADAPTER del BANCO
@@ -63,10 +50,11 @@ class HomeActivity: AppCompatActivity() {
 
 
         botonCalcularRendimiento.setOnClickListener{
-            val monto:Int? = etMonto.text.toString().toIntOrNull()
+            val monto: Double? = etMonto.text.toString().toDoubleOrNull()
             val PlazoEndias:Int? = etPlazoEnDias.text.toString().toIntOrNull()
 
             val entradaDeBanco = spinnerBanco.selectedItem.toString()
+<<<<<<< HEAD
             if(monto==0 || etMonto.text.isEmpty()){
                 mostrarToast("El monto no puede ser cero ni vacio")
             }else if(PlazoEndias==0 || etPlazoEnDias.text.isEmpty()){
@@ -76,12 +64,44 @@ class HomeActivity: AppCompatActivity() {
                 mostrarToast("$monto para $PlazoEndias de $entradaDeBanco para Plazo fijo")
                 irARendimiento()
                 // mostrarToast(fullinfo.toString())
+=======
+            val entradaDeInversion = spinnerInversion.selectedItem.toString()
+
+            // Validaciones previas al envio del form
+            if(etMonto.text.isEmpty()) {
+                mostrarToast("El Monto no puede quedar vacio")
+            }else if(monto?.toInt() ==0) {
+                mostrarToast("El monto no puede ser cero")
+            }else if(etPlazoEnDias.text.isEmpty()) {
+                mostrarToast("El plazo de Diaz no puede estar vacio")
+            } else if(PlazoEndias==0){
+                mostrarToast("El plazo no puede ser cero")
+            }else if(entradaDeBanco == getString(R.string.elija_banco)) {
+                mostrarToast("Seleccione uno de los bancos")
+            }else if(entradaDeInversion == getString(R.string.elija_inversion)) {
+                mostrarToast("Seleccione una de las inversiones propuestas")
+            }else {
+                // mostrarToast("$monto para $PlazoEndias de $entradaDeBanco para $entradaDeInversion")
+
+                val intent = Intent(this, RendimientoActivity::class.java).apply {
+                    //paso parametros
+                    putExtra("MONTO_DOBLE", monto)
+                    putExtra("PLAZO_INT", PlazoEndias)
+                    putExtra("BANCO_STRING", entradaDeBanco)
+                    putExtra("INVERSION_STRING", entradaDeInversion)
+                }
+                startActivity(intent)
+>>>>>>> ed0ec3500b92d8af751244958136d5444adf4d2b
             }
         }
 
+        // Acciones para historial o salir
+        botonHistorial.setOnClickListener{ irAHistorial() }
 
+        botonSalir.setOnClickListener{ irAInicio() }
 
         //Guardar en preferencias (para pasar a Jose)
+        /*
         val misPreferenciasARendimiento = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
         misPreferenciasARendimiento.edit().apply {
 
@@ -93,24 +113,30 @@ class HomeActivity: AppCompatActivity() {
             apply()
 
         }
-        botonHistorial.setOnClickListener{ irAHistorial() }
-        botonSalir.setOnClickListener{ irAInicio() }
+        */
 
-
-        // aqui va el codigo
     }
-    fun irAHistorial(){
+
+    private fun irAHistorial(){
         val intent = Intent(this, HistorialActivity::class.java)
         startActivity(intent) }
 
-    fun irAInicio(){
+    private fun irAInicio(){
+        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        misPreferencias.edit().apply {
+            putBoolean("estaLogeado", false)
+            apply()
+        }
         val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent) }
-
+        startActivity(intent)
+        finish()
+    }
+    /*
     fun irARendimiento(){
         val intent = Intent(this, RendimientoActivity::class.java)
         startActivity(intent)
     }
+    */
     private fun mostrarToast(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }

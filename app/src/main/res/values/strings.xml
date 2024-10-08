@@ -22,10 +22,39 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi�
     <string name="aceptar">Aceptar</string>
     <string name="denegar">Denegar</string>
 
-    <string-array name="entradaBanco">
-        <item>BNA</item>
-        <item>STR</item>
-        <item>ICBC</item>
-    </string-array>
 
+    <string name="elija_banco">Elija un banco</string>
+    <string name="elija_inversion">Elija un tipo de Inversion</string>
+    <string name="tu_monto_a_retirar_sera_de">Tu monto a retirar sera de:</string>
+    <string name="prueba">$prueba</string>
+    <string name="invertiste">Invertiste:</string>
+    <string name="en_el_banco">En el banco:</string>
+    <string name="felicidades_carlos">Felicidades $Carlos</string>
+    <string name="a_un_plazo_de">A un plazo de:</string>
+    <string name="los_interese_ganados_son_de">Interes ganado:</string>
+    <string name="volver_a_simulador">Volver a Simulador</string>
+    <string name="el_tna_del_banco_es">El TNA del banco es:</string>
+    <string name="calcular_rendimiento">Calcular rendimiento</string>
+    <string name="salir">Salir</string>
+    <string name="ver_historial">Ver historial</string>
+    <string name="ingrese_plazo_de_dias">Ingrese plazo de dias</string>
+    <string name="ingrese_monto_a_invertir">Ingrese monto a invertir</string>
+    <string name="que_inversi_n_desea_simular">¿Que inversiòn desea simular?</string>
+    <string-array name="entradaBanco">
+        <item>@string/elija_banco</item>
+        <item>Banco Nacion</item>
+        <item>Banco Provincia</item>
+        <item>Galicia</item>
+        <item>ICBC</item>
+        <item>Santander</item>
+    </string-array>
+<<<<<<< HEAD
+
+=======
+    <string-array name="entradaInversion">
+        <item>@string/elija_inversion</item>
+        <item>plazo fijo</item>
+        <item>FCI</item>
+    </string-array>
+>>>>>>> ed0ec3500b92d8af751244958136d5444adf4d2b
 </resources>
