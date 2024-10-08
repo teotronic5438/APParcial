@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -7,171 +11,182 @@
     android:padding="8dp"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Test Inversor"
-        android:textSize="12dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:layout_margin="2dp"
 
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="¿Cuánto conocés del Mercado de Capitales (Acciones, Bonos, Obligaciones Negociables, Letras del Tesoro, Fondos Comunes de Inversión y CEDEAR)?"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:layout_margin="4dp"
-        />
-
-    <RadioGroup
-        android:id="@+id/rg1pc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <RadioButton
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rdb1"
-            android:text="No poseo conocimiento"
-            android:textSize="12dp"
+            android:text="Test Inversor"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:layout_margin="2dp"
+            android:padding="10dp"
+
             />
-        <RadioButton
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rdb2"
-            android:text="Tengo conocimientos básicos acerca de las distintas alternativas de inversión"
-            android:textSize="12dp"
+            android:text="¿Cuánto conocés del Mercado de Capitales (Acciones, Bonos, Obligaciones Negociables, Letras del Tesoro, Fondos Comunes de Inversión y CEDEAR)?"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:layout_margin="10dp"
             />
 
-        <RadioButton
+        <RadioGroup
+            android:id="@+id/rg1pc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rdb3"
-            android:text="Tengo conocimientos acerca del riesgo y rentabilidad potencial de los distintos instrumentos financieros"
-            android:textSize="12dp"
-            />
+            android:layout_margin="10dp"            >
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb1"
+                android:text="No poseo conocimiento"
+                android:textSize="16dp"
+                android:layout_margin="4dp"
+                />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb2"
+                android:text="Tengo conocimientos básicos acerca de las distintas alternativas de inversión"
+                android:textSize="16dp"
+                android:layout_margin="4dp"
+                />
 
-        <RadioButton
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb3"
+                android:text="Tengo conocimientos acerca del riesgo y rentabilidad potencial de los distintos instrumentos financieros"
+                android:textSize="16dp"
+                android:layout_margin="4dp"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb4"
+                android:text="Poseo un profundo conocimiento acerca de las distintas alternativas de inversión (Profesional en Finanzas)"
+                android:textSize="16dp"
+                android:layout_margin="4dp"
+                />
+
+        </RadioGroup>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rdb4"
-            android:text="Poseo un profundo conocimiento acerca de las distintas alternativas de inversión (Profesional en Finanzas)"
-            android:textSize="12dp"
+            android:text="¿Aproximadamente, qué porcentaje de tus ingresos mensuales ahorrás por mes?"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:layout_margin="10dp"
+
             />
 
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="¿Aproximadamente, qué porcentaje de tus ingresos mensuales ahorrás por mes?"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:layout_margin="4dp"
-
-        />
-
-    <RadioGroup
-        android:id="@+id/rg2pc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <RadioButton
+        <RadioGroup
+            android:id="@+id/rg2pc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rdb5"
-            android:text="Menos del 5%"
-            android:textSize="12dp"
-            />
-        <RadioButton
+            android:layout_margin="10dp"
+            >
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb5"
+                android:text="Menos del 5%"
+                android:textSize="16dp"
+                />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb6"
+                android:text="Entre el 5% y el 20%"
+                android:textSize="16dp"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb7"
+                android:text="Entre el 21% y el 50%"
+                android:textSize="16dp"
+                />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb8"
+                android:text="Más del 50%"
+                android:textSize="16dp"
+                />
+
+        </RadioGroup>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rdb6"
-            android:text="Entre el 5% y el 20%"
-            android:textSize="12dp"
+            android:text="¿Cuánto tiempo conservarías esta inversión?"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textAlignment="textStart"
+            android:textColor="#000000"
+            android:layout_margin="10dp"
             />
 
-        <RadioButton
+        <RadioGroup
+            android:id="@+id/rg3pc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rdb7"
-            android:text="Entre el 21% y el 50%"
-            android:textSize="12dp"
-            />
+            android:layout_margin="10dp"
+            >
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb9"
+                android:text="Menos de 180 días"
+                android:textSize="16dp"
+                />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb10"
+                android:text="Entre 180 días y 1 año"
+                android:textSize="16dp"
+                />
 
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rdb8"
-            android:text="Más del 50%"
-            android:textSize="12dp"
-            />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb11"
+                android:text="De 1 a 2 años"
+                android:textSize="16dp"
+                />
 
-    </RadioGroup>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rdb12"
+                android:text="Más de 2 años."
+                android:textSize="16dp"
+                />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="¿Cuánto tiempo conservarías esta inversión?"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:layout_margin="2dp"
-        />
+        </RadioGroup>
 
-    <RadioGroup
-        android:id="@+id/rg3pc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rdb9"
-            android:text="Menos de 180 días"
-            android:textSize="12dp"
-            />
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rdb10"
-            android:text="Entre 180 días y 1 año"
-            android:textSize="12dp"
-            />
 
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rdb11"
-            android:text="De 1 a 2 años"
-            android:textSize="12dp"
-            />
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rdb12"
-            android:text="Más de 2 años."
-            android:textSize="12dp"
-            />
-
-    </RadioGroup>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:textAlignment="center"
     android:gravity="center"
+    android:layout_margin="10dp"
 
     >
     <Button
@@ -181,6 +196,7 @@
         android:text="Cancelar"
         android:padding="12dp"
         android:layout_margin="8dp"
+        android:textSize="16dp"
         />
 
     <Button
@@ -190,6 +206,8 @@
         android:text="Guardar"
         android:layout_margin="8dp"
         android:padding="12dp"
+        android:textSize="16dp"
         />
 </LinearLayout>
 </LinearLayout>
+</ScrollView>
