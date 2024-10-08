@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+=======
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+>>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
@@ -57,12 +62,24 @@
         android:text="Calcular rendimiento"
         android:layout_marginTop="160dp" />
 
+<<<<<<< HEAD
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
         android:orientation="horizontal"
         android:gravity="center">
+=======
+    <Spinner
+        android:id="@+id/inversion_spinner"
+        android:layout_width="0dp"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/banco_spinner"
+        android:layout_height="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+>>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
 
         <Button
             android:id="@+id/btSalir"
@@ -71,6 +88,7 @@
             android:text="Salir"
             android:layout_weight="1" />
 
+<<<<<<< HEAD
         <Button
             android:id="@+id/btVerHistorial"
             android:layout_width="wrap_content"
@@ -78,5 +96,39 @@
             android:text="Ver historial"
             android:layout_weight="1" />
     </LinearLayout>
+=======
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/calcular_rendimiento"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       android:layout_marginTop="50dp"
+       app:layout_constraintTop_toBottomOf="@+id/inversion_spinner"
+       />
+   <Button
+       android:id="@+id/btSalir"
+       android:layout_width="135dp"
+       android:layout_height="wrap_content"
+       android:text="@string/salir"
+       app:layout_constraintEnd_toStartOf="@+id/btVerHistorial"
+       app:layout_constraintHorizontal_bias="0.5"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintWidth_percent="0.5"
+       android:layout_marginBottom="35dp" />
+
+   <Button
+       android:id="@+id/btVerHistorial"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/ver_historial"
+       app:layout_constraintStart_toEndOf="@+id/btSalir"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintWidth_percent="0.5"
+       android:layout_marginBottom="35dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
 
 </LinearLayout>

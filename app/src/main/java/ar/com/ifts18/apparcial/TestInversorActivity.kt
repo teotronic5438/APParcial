@@ -30,7 +30,10 @@ class TestInversorActivity : AppCompatActivity() {
 
 
             val rbSeleccionado1 = rgOpciones1.checkedRadioButtonId
+            val rbSeleccionado2 = rgOpciones2.checkedRadioButtonId
+            val rbSeleccionado3 = rgOpciones3.checkedRadioButtonId
 
+            val errorAnswer = "Falta responder una o más preguntas"
 
             if (rbSeleccionado1 != -1) {
 
@@ -50,93 +53,90 @@ class TestInversorActivity : AppCompatActivity() {
                 }
                 Log.d("tag", "Se seleccionó $opcion1")
 
-            } else {
+                if (rbSeleccionado2 != -1) {
 
-                //TBD Se debe seleccionar un RB
-                Log.d("tag", "No se seleccionó nada")
-            }
+                    val rbSeleccionado2 = findViewById<RadioButton>(rbSeleccionado2)
+
+                    val opcion2 = rbSeleccionado2.text
+
+                    if (rbSeleccionado2.text == "Menos del 5%") {
+                        sumTotal += 1
+                    } else if (rbSeleccionado2.text == "Entre el 5% y el 20%") {
+                        sumTotal += 2
+                    } else if (rbSeleccionado2.text == "Entre el 21% y el 50%") {
+                        sumTotal += 3
+                    } else {
+                        sumTotal += 4
+                    }
+                    Log.d("tag", "Se seleccionó $opcion2")
+
+                    if (rbSeleccionado3 != -1) {
 
 
-            val rbSeleccionado2 = rgOpciones2.checkedRadioButtonId
+                        val rbSeleccionado3 = findViewById<RadioButton>(rbSeleccionado3)
 
-            if (rbSeleccionado2 != -1) {
+                        val opcion3 = rbSeleccionado3.text
 
-                val rbSeleccionado2 = findViewById<RadioButton>(rbSeleccionado2)
+                        if (rbSeleccionado3.text == "Menos de 180 días") {
+                            sumTotal += 1
+                        } else if (rbSeleccionado3.text == "Entre 180 días y 1 año") {
+                            sumTotal += 2
+                        } else if (rbSeleccionado3.text == "De 1 a 2 años") {
+                            sumTotal += 3
+                        } else {
+                            sumTotal += 4
+                        }
+                        Log.d("tag", "Se seleccionó $opcion3")
 
-                val opcion2 = rbSeleccionado2.text
 
-                if (rbSeleccionado2.text == "Menos del 5%") {
-                    sumTotal += 1
-                } else if (rbSeleccionado2.text == "Entre el 5% y el 20%") {
-                    sumTotal += 2
-                } else if (rbSeleccionado2.text == "Entre el 21% y el 50%") {
-                    sumTotal += 3
+                        val percentage = ((sumTotal.toFloat() / 12) * 100)
+                        var perfil: String = ""
+
+                        if (0 < percentage && percentage < 33) {
+                            perfil = "Conservador"
+                            Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
+
+                        } else if (32 < percentage && percentage < 66) {
+                            perfil = "Moderado"
+                            Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
+                        } else {
+                            perfil = "De Riesgo"
+                            Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
+
+                        }
+
+
+                        // guardo en my shared preferences el perfil
+                        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+                        misPreferencias.edit().apply {
+
+                            putString("perfil", perfil)
+                            putBoolean("testCompletado", true)
+                            apply()
+                        }
+                        irAHomeActivity()
+
+                    } else {
+
+                        //TBD Se debe seleccionar un RB
+                        Log.d("tag", "No answer for question 3")
+                        Toast.makeText(this, errorAnswer, Toast.LENGTH_LONG).show()
+                    }
+
                 } else {
-                    sumTotal += 4
+
+                    //TBD Se debe seleccionar un RB
+                    Log.d("tag", "No answer for question 2")
+                    Toast.makeText(this, errorAnswer, Toast.LENGTH_LONG).show()
                 }
-                Log.d("tag", "Se seleccionó $opcion2")
 
             } else {
 
                 //TBD Se debe seleccionar un RB
-                Log.d("tag", "No se seleccionó nada")
+                Log.d("tag", "No answer for question 1")
+                Toast.makeText(this, errorAnswer, Toast.LENGTH_LONG).show()
             }
 
-            val rbSeleccionado3 = rgOpciones3.checkedRadioButtonId
-
-
-            if (rbSeleccionado3 != -1) {
-
-
-                val rbSeleccionado3 = findViewById<RadioButton>(rbSeleccionado3)
-
-                val opcion3 = rbSeleccionado3.text
-
-                if (rbSeleccionado3.text == "Menos de 180 días") {
-                    sumTotal += 1
-                } else if (rbSeleccionado3.text == "Entre 180 días y 1 año") {
-                    sumTotal += 2
-                } else if (rbSeleccionado3.text == "De 1 a 2 años") {
-                    sumTotal += 3
-                } else {
-                    sumTotal += 4
-                }
-                Log.d("tag", "Se seleccionó $opcion3")
-
-            } else {
-
-                //TBD Se debe seleccionar un RB
-                Log.d("tag", "No se seleccionó nada")
-            }
-
-
-            // Toast.makeText(this, "Total: " + sumTotal.toString() , Toast.LENGTH_LONG).show()
-            val percentage = ((sumTotal.toFloat() / 12) * 100)
-            var perfil: String = ""
-
-            if (0 < percentage && percentage < 33) {
-                perfil = "Conservador"
-                Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
-
-            } else if (32 < percentage && percentage < 66) {
-                perfil = "Moderado"
-                Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
-            } else {
-                perfil = "De Riesgo"
-                Toast.makeText(this, "El perfil es $perfil", Toast.LENGTH_LONG).show()
-
-            }
-
-
-            // guardo en my shared preferences el perfil
-            val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-            misPreferencias.edit().apply {
-
-                putString("perfil", perfil)
-                putBoolean("testCompletado", true)
-                apply()
-            }
-            irAHomeActivity()
         }
 
 

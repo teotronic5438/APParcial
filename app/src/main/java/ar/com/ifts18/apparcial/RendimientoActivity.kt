@@ -26,6 +26,7 @@ class RendimientoActivity: AppCompatActivity() {
         val tvInteresGanado = findViewById<TextView>(R.id.tvInteresesGanados)
         val tvROI = findViewById<TextView>(R.id.tvROI)
         val tvTNA = findViewById<TextView>(R.id.tvTNA)
+        val tvRecomendacion = findViewById<TextView>(R.id.tvRecomendacion)
         val btnVolverSimulador = findViewById<Button>(R.id.btnVolverSimulador)
 
         // Traigo Shared Preferences para info usuario
@@ -48,16 +49,43 @@ class RendimientoActivity: AppCompatActivity() {
         // Agregar registros al listado
         bancos["Banco Nacion"] = 39.0
         bancos["Banco Santander"] = 33.0
-        bancos["Banco Galicia"] = 37.5
+        bancos["Banco Galicia"] = 37.5 // prueba 43.0
         bancos["Banco BBVA"] = 35.5
-        bancos["Banco HSBC"] = 37.0
+        bancos["Banco HSBC"] = 37.0 // 37.0
 
+
+        /*
+
+        / Crear un listado con todos los bancos
+        val bancos = mutableListOf<Map<String, Map<String, Double>>>()
+
+        // Agregar registros al listado
+        bancos.add(mapOf("Nacion" to mapOf("plazoFijo" to 39.0, "FCI" to 56.0)))
+        bancos.add(mapOf("Santander" to mapOf("plazoFijo" to 33.0, "FCI" to 45.0)))
+        bancos.add(mapOf("Galicia" to mapOf("plazoFijo" to 37.5, "FCI" to 60.0)))
+        bancos.add(mapOf("BBVA" to mapOf("plazoFijo" to 35.5, "FCI" to 45.0)))
+        bancos.add(mapOf("HSBC" to mapOf("plazoFijo" to 37.0, "FCI" to 60.0)))
+
+        // Buscar el valor de tnaBanco
+        val tnaBanco: Double? = bancos.find { it.containsKey(bancoString) }
+            ?.get(bancoString)
+            ?.get(inversionString)
+
+        // Verificar el resultado y mostrar el valor
+        if (tnaBanco != null) {
+            println("La TNA de $bancoString para $inversionString es: $tnaBanco")
+        } else {
+            println("No se encontró información para el banco $bancoString y la inversión $inversionString.")
+        }
+
+        */
 
         val tnaBanco: Double? = bancos[bancoString]
 
 
         // Verifica si tnaBanco no es nulo antes de continuar
         if (tnaBanco != null) {
+
             // Imprimo resultados en Activity
             val interesGanado = calcularGanancia(montoDouble, plazoInt, tnaBanco)
             val valorFinal = montoDouble + interesGanado
@@ -73,15 +101,23 @@ class RendimientoActivity: AppCompatActivity() {
             tvTNA.text = tnaBanco.toString() // Mostrar TNA
 
             // Guardar el historial en SharedPreferences (si lo necesitas)
-            // guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
+            guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, valorFinal, ROIcalculado, inversionString)
+
+
 
         } else {
             // Manejo de error si no se encuentra el banco
             mostrarToast("Banco no encontrado: $bancoString")
         }
 
-        // Luego de mostrar los datos, guardo el historial en SharedPreferences
-        // guardarEnHistorialPreferences(montoDouble, plazoInt, bancoString, interesGanado, ROIcalculado)
+        // Cálculo para el banco con la TNA más alta
+        val bancoConTnaMasAlta = obtenerBancoConTnaMasAlta(bancos)
+        // Destrucutring por separado
+        val (bancoTNAAlta, tasaTNAAlta) = bancoConTnaMasAlta
+        val gananciaMasAlta = calcularGanancia(montoDouble, plazoInt, tasaTNAAlta)
+        val valorFinalMasAlta = montoDouble + gananciaMasAlta
+        val roiMasAlto = calcularROI(montoDouble + gananciaMasAlta, montoDouble)
+        tvRecomendacion.text = "Para mayor rendimiendo puedes usar el $bancoTNAAlta que tiene una taza de ${String.format("%.2f", tasaTNAAlta)} %.\nTe daria una ganancia de $ ${String.format("%.2f", valorFinalMasAlta)}.\nCon un ROI de: ${String.format("%.2f", roiMasAlto)} %."
 
         // Luego de mostrar datos Vuelvo a simulador
         btnVolverSimulador.setOnClickListener {
@@ -94,13 +130,19 @@ class RendimientoActivity: AppCompatActivity() {
         // castear TNA A DOUBLE
         // val TNA = 43.0
         val ganancia = montoDouble * ((tnaBanco / 100) / 360) * plazoInt
-        mostrarToast("$ganancia")
+        // mostrarToast("$ganancia")    // mostrando solo ganancia si llegue hasta aqui SOY FELIZ
         return ganancia
     }
 
     private fun calcularROI(valorFinal: Double, montoDouble: Double) : Double{
         val roiCalculado = ( (valorFinal - montoDouble) / montoDouble ) * 100
         return roiCalculado
+    }
+
+    private fun obtenerBancoConTnaMasAlta(bancos: Map<String, Double>): Pair<String, Double> {
+        // Busca el banco con la mayor TNA
+        val bancoConTnaMasAlta = bancos.maxByOrNull { it.value }
+        return bancoConTnaMasAlta?.toPair() ?: Pair("No disponible", 0.0)
     }
 
     private fun irASimulador() {
@@ -110,6 +152,50 @@ class RendimientoActivity: AppCompatActivity() {
     }
     private fun mostrarToast(mensaje: String) {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+    }
+
+    @SuppressLint("DefaultLocale")
+    private fun guardarEnHistorialPreferences(montoDouble: Double, plazoInt: Int, bancoString: String, valorFinal: Double, ROIcalculado: Double, inversionString: String) {
+        // Inicializa el nuevo registro
+        val nuevoRegistro = """
+Monto invertido: $ ${String.format("%.2f", montoDouble)}
+Plazo elegido: $plazoInt dias 
+Banco: $bancoString 
+Recibiras: $ ${String.format("%.2f", valorFinal)}
+El roi calculado: ${String.format("%.2f", ROIcalculado)} %
+Inversion elegida: ${inversionString.uppercase()}
+         """
+        // String.format("%.2f", interesGanado)
+
+        // Inicializa SharedPreferences
+        val historialGuardar = getSharedPreferences("historialPreferences", Context.MODE_PRIVATE)
+
+        // Obtén el número de registros actuales (limitar a 5)
+        val contadorRegistro = historialGuardar.getInt("contador", 0)
+
+        val editor = historialGuardar.edit()
+
+        // Si el contador es menor a 5, incrementa y guarda normalmente
+        if (contadorRegistro < 5) {
+            // Guardar el nuevo registro en la posición actual
+            editor.putString("historial${contadorRegistro + 1}", nuevoRegistro)
+            // Incrementar el contador
+            editor.putInt("contador", contadorRegistro + 1)
+        } else {
+            // Si ya hay 5 registros, desplaza todos los registros una posición hacia atrás
+            for (i in 1 until 5) {
+                val registroAnterior = historialGuardar.getString("historial${i + 1}", "")
+                editor.putString("historial$i", registroAnterior) // Mover el registro a la posición anterior
+            }
+            // Sobreescribir el último registro con el nuevo
+            editor.putString("historial5", nuevoRegistro)
+        }
+
+        // Aplicar los cambios
+        editor.apply()
+
+        // Opcional: Mostrar un toast con el registro nuevo
+        // mostrarToast("Registro guardado: $nuevoRegistro")
     }
 
     /*
