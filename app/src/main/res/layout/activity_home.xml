@@ -66,11 +66,6 @@
         app:layout_constraintTop_toBottomOf="@+id/et2"
         />
 
-<<<<<<< HEAD
-
-    -->
-    <!--  app:layout_constraintTop_toBottomOf="@+id/et3"-->
-=======
      <Spinner
         android:id="@+id/inversion_spinner"
         android:layout_width="0dp"
@@ -80,8 +75,8 @@
        android:autofillHints=""
        android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@id/banco_spinner"
->>>>>>> ed0ec3500b92d8af751244958136d5444adf4d2b
 
+        />
 
 
    <Button
@@ -93,7 +88,7 @@
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        android:layout_marginTop="50dp"
-       app:layout_constraintTop_toBottomOf="@+id/banco_spinner"
+       app:layout_constraintTop_toBottomOf="@+id/inversion_spinner"
        />
    <Button
        android:id="@+id/btSalir"

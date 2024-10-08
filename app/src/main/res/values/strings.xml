@@ -48,13 +48,9 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
         <item>ICBC</item>
         <item>Santander</item>
     </string-array>
-<<<<<<< HEAD
-
-=======
     <string-array name="entradaInversion">
         <item>@string/elija_inversion</item>
         <item>plazo fijo</item>
         <item>FCI</item>
     </string-array>
->>>>>>> ed0ec3500b92d8af751244958136d5444adf4d2b
 </resources>

@@ -37,6 +37,7 @@ class HomeActivity: AppCompatActivity() {
 
         // Cargo Spinner para Banco y tipo de Inversion
         val spinnerBanco = findViewById<Spinner>(R.id.banco_spinner)
+        val spinnerInversion = findViewById<Spinner>(R.id.inversion_spinner)
 
         //CREAMOS EL ARRAY DEL ADAPTER del BANCO
         ArrayAdapter.createFromResource(
@@ -47,24 +48,20 @@ class HomeActivity: AppCompatActivity() {
             spinnerBanco.adapter = adapter
         }
 
-
+        //CREAMOS EL ARRAY DEL ADAPTER de la INVERSION
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.entradaInversion,
+            android.R.layout.simple_spinner_item
+        ).also { adapter -> adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            spinnerInversion.adapter = adapter
+        }
 
         botonCalcularRendimiento.setOnClickListener{
             val monto: Double? = etMonto.text.toString().toDoubleOrNull()
             val PlazoEndias:Int? = etPlazoEnDias.text.toString().toIntOrNull()
 
             val entradaDeBanco = spinnerBanco.selectedItem.toString()
-<<<<<<< HEAD
-            if(monto==0 || etMonto.text.isEmpty()){
-                mostrarToast("El monto no puede ser cero ni vacio")
-            }else if(PlazoEndias==0 || etPlazoEnDias.text.isEmpty()){
-                mostrarToast("El plazo no puede ser cero ni vacio")
-            }else {
-
-                mostrarToast("$monto para $PlazoEndias de $entradaDeBanco para Plazo fijo")
-                irARendimiento()
-                // mostrarToast(fullinfo.toString())
-=======
             val entradaDeInversion = spinnerInversion.selectedItem.toString()
 
             // Validaciones previas al envio del form
@@ -91,7 +88,6 @@ class HomeActivity: AppCompatActivity() {
                     putExtra("INVERSION_STRING", entradaDeInversion)
                 }
                 startActivity(intent)
->>>>>>> ed0ec3500b92d8af751244958136d5444adf4d2b
             }
         }
 
