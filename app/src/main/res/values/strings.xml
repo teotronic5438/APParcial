@@ -27,8 +27,5 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
         <item>STR</item>
         <item>ICBC</item>
     </string-array>
-    <string-array name="entradaInversion">
-        <item>plazo fijo</item>
-        <item>FCI</item>
-    </string-array>
+
 </resources>
