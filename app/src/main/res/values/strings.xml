@@ -53,7 +53,7 @@ El clic en IMPRIMIR me permite obtener una copia del presente, cuyo texto tambi√
     </string-array>
     <string-array name="entradaInversion">
         <item>@string/elija_inversion</item>
-        <item>plazo fijo</item>
+        <item>Plazo Fijo</item>
         <item>FCI</item>
     </string-array>
 </resources>

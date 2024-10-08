@@ -163,7 +163,7 @@ Plazo elegido: $plazoInt dias
 Banco: $bancoString 
 Recibiras: $ ${String.format("%.2f", valorFinal)}
 El roi calculado: ${String.format("%.2f", ROIcalculado)} %
-Inversion elegida: $inversionString"
+Inversion elegida: ${inversionString.uppercase()}
          """
         // String.format("%.2f", interesGanado)
 
