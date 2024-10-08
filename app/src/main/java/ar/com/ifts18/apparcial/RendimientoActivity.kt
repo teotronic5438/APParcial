@@ -143,9 +143,18 @@ class RendimientoActivity: AppCompatActivity() {
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 
+    @SuppressLint("DefaultLocale")
     private fun guardarEnHistorialPreferences(montoDouble: Double, plazoInt: Int, bancoString: String, valorFinal: Double, ROIcalculado: Double, inversionString: String) {
         // Inicializa el nuevo registro
-        val nuevoRegistro = "Monto invertido: $montoDouble \nPlazo elegido: $plazoInt \nBanco: $bancoString \nRecibiras: $valorFinal \nEl roi calculado: $ROIcalculado\nInversion elegida: $inversionString"
+        val nuevoRegistro = """
+Monto invertido: $ ${String.format("%.2f", montoDouble)}
+Plazo elegido: $plazoInt dias 
+Banco: $bancoString 
+Recibiras: $ ${String.format("%.2f", valorFinal)}
+El roi calculado: ${String.format("%.2f", ROIcalculado)} %
+Inversion elegida: $inversionString"
+         """
+        // String.format("%.2f", interesGanado)
 
         // Inicializa SharedPreferences
         val historialGuardar = getSharedPreferences("historialPreferences", Context.MODE_PRIVATE)

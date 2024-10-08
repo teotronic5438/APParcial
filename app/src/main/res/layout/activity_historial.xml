@@ -28,25 +28,25 @@
         android:id="@+id/historial5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/historial4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/historial3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/historial2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:textSize="16sp"/>
     <TextView
         android:id="@+id/historial1"
