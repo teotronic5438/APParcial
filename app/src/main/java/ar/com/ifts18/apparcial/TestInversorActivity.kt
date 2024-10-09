@@ -11,6 +11,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class TestInversorActivity : AppCompatActivity() {
+
+    /**
+     * Called when the activity is first created.
+     *
+     * This method sets up the activity layout and initializes UI components, including buttons
+     * and radio groups for user input. It also handles click events for saving and canceling
+     * the test. When the user saves their answers, it calculates their investment profile based
+     * on selected options and stores the result in SharedPreferences. If any questions are left
+     * unanswered, a warning message is displayed.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                           this Bundle contains the data it most recently supplied in
+     *                           onSaveInstanceState(Bundle). Otherwise, it is null.
+     */
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_testinversor)

@@ -14,6 +14,23 @@ import androidx.appcompat.app.AppCompatActivity
 
 class HistorialActivity: AppCompatActivity() {
     @SuppressLint("SetTextI18n")
+
+    /**
+     * Método que se llama al crear la actividad `HistorialActivity`.
+     *
+     * Este método inicializa la interfaz de usuario de la actividad y configura
+     * las vistas necesarias para mostrar el historial de consultas del usuario.
+     *
+     * Se realiza lo siguiente:
+     * - Se establece el diseño de la actividad mediante `setContentView`.
+     * - Se inicializan los elementos de la interfaz de usuario, como `TextView`
+     *   para mostrar el historial y los datos del usuario.
+     * - Se recuperan los datos del usuario y su historial desde `SharedPreferences`.
+     *
+     * @param savedInstanceState Un `Bundle` que contiene el estado anterior de la actividad, si existe.
+     */
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_historial)

@@ -14,6 +14,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 class MainActivity : AppCompatActivity() {
     // TANTO PARA NO BORRAR INFOOOOOOOOOOOOOOOOOOOOOOOO
     private lateinit var tycLauncher: ActivityResultLauncher<Intent>
+    /**
+     * Método que se llama al crear la actividad `MainActivity`.
+     *
+     * En este método se inicializan los elementos de la interfaz de usuario,
+     * como botones y campos de texto. También se configura el lanzador de
+     * actividades para los términos y condiciones, y se gestionan las
+     * preferencias compartidas para recordar el estado de aceptación de
+     * términos y condiciones.
+     *
+     * @param savedInstanceState Un `Bundle` que contiene el estado anterior de la actividad, si existe.
+     */
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

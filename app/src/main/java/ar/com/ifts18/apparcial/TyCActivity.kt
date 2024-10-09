@@ -9,6 +9,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class TyCActivity: AppCompatActivity() {
+
+    /**
+     * Método llamado al crear la actividad de Términos y Condiciones (TyC).
+     * Este método establece la vista de la actividad, carga el texto de
+     * los términos y condiciones, y configura los botones para aceptar
+     * o denegar los términos. Al aceptar o denegar, se actualizan las
+     * preferencias y se envía un resultado a `MainActivity`.
+     *
+     * @param savedInstanceState Bundle que contiene el estado guardado de la actividad,
+     *                           o null si no hay estado guardado.
+     * @see MainActivity
+     */
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tyc)

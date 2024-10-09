@@ -14,6 +14,19 @@ import androidx.appcompat.app.AppCompatActivity
 
 class HomeActivity: AppCompatActivity() {
     @SuppressLint("SetTextI18n")
+
+    /**
+     * Método llamado al crear la actividad.
+     * Este método inicializa la interfaz de usuario, establece los listeners
+     * para los botones y valida los datos ingresados antes de navegar a
+     * `RendimientoActivity`.
+     *
+     * @param savedInstanceState Bundle que contiene el estado guardado de la actividad,
+     *                           o null si no hay estado guardado.
+     * @see RendimientoActivity
+     */
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)

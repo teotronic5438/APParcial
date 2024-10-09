@@ -13,6 +13,21 @@ import androidx.appcompat.app.AppCompatActivity
 class RendimientoActivity: AppCompatActivity() {
 
     @SuppressLint("SetTextI18n", "DefaultLocale")
+
+    /**
+     * Called when the activity is first created.
+     *
+     * This method initializes the activity layout and sets up the user interface elements,
+     * retrieves user preferences, receives intent extras for the investment calculation,
+     * and displays the results based on user input. It also includes event listeners for buttons
+     * that allow users to navigate back to the simulator.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down
+     *                           then this Bundle contains the data it most recently supplied in
+     *                           onSaveInstanceState(Bundle). Otherwise, it is null.
+     */
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rendimiento)
