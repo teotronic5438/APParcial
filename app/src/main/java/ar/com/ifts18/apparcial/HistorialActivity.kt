@@ -1,15 +1,11 @@
 package ar.com.ifts18.apparcial
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.view.View
 import android.widget.Button
-import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class HistorialActivity: AppCompatActivity() {
@@ -25,28 +21,21 @@ class HistorialActivity: AppCompatActivity() {
         val tvHistorial5 = findViewById<TextView>(R.id.historial5)
         val tvDatosUsuario = findViewById<TextView>(R.id.datosUsuario)
 
-        // Traigo Shared Preferences para info usuario
-        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-        val correo_global = misPreferencias.getString("correo_global", null)
-
-        val historialPreferences = getSharedPreferences("user_$correo_global", Context.MODE_PRIVATE)
-
-        val hNombre = historialPreferences.getString("nombre", null)
-        val hUsername = historialPreferences.getString("apellido", null)
-        val hPerfil = historialPreferences.getString("perfil", null)
-        // uso correo pero va perfil, falta ver con Ari
-
+        val misPreferencias = getSharedPreferences("MyPreferences", MODE_PRIVATE)
+        val hNombre = misPreferencias.getString("username", null)
+        val hUsername = misPreferencias.getString("userlastname", null)
+        val hPerfil = misPreferencias.getString("perfil", null)
 
         if (hNombre != null) {
             if (hUsername != null) {
                 if (hPerfil != null) {
-                    tvDatosUsuario.text = "Hola ${hNombre.replaceFirstChar { it.titlecase() }} ${hUsername.replaceFirstChar { it.titlecase() }} su perfil es ${hPerfil.replaceFirstChar { it.titlecase() }}.\nEstas son sus ultimas consultas:"
+                    tvDatosUsuario.text = "Hola ${hNombre.uppercase()} ${hUsername.uppercase()} su perfil es ${hPerfil.uppercase()}"
                 }
             }
         }
 
+        val historialPreferences = getSharedPreferences("historialPreferences", MODE_PRIVATE)
 
-        val contadorMax = historialPreferences.getInt("contador", 0)
 
         val historialRegistro: MutableMap<String, String> = mutableMapOf()
 
@@ -61,13 +50,7 @@ class HistorialActivity: AppCompatActivity() {
         val registro4 = historialPreferences.getString("historial4", "Sin registro")
         val registro5 = historialPreferences.getString("historial5", "Sin registro")
 
-        /*
-        if(contadorMax != 0){
-            for (i in 1..contadorMax) {
-                tvHistorial
-            }
-        }
-        */
+
         if(registro5 == "Sin registro"){
             tvHistorial5.visibility = View.GONE
         }
@@ -107,7 +90,4 @@ class HistorialActivity: AppCompatActivity() {
         finish()
     }
 
-    private fun mostrarToast(mensajeToast: String){
-        Toast.makeText(this, mensajeToast, Toast.LENGTH_LONG).show()
-    }
 }
