@@ -38,7 +38,7 @@ class HomeActivity: AppCompatActivity() {
 
         // Muestro saludo de Bienvenida
         if (hNombre != null) {
-            tvNumero2.text = "Bienvenido ${hNombre.replaceFirstChar { it.titlecase() }}"
+            tvNumero2.text = "¡Bienvenido ${hNombre.replaceFirstChar { it.titlecase() }}!"
         }
 
 
