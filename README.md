@@ -21,6 +21,8 @@
 
 <p>Acceso: <a href="https://www.figma.com/design/8ihcV8f2lTYUmOOIsKx7Ep/Untitled?node-id=0-1&t=JyMq1mwUu7tT64vE-1">Ir a Figma</a></p>
 
+<p>Enlace a grabacion de la aplicacion: <a href="https://youtu.be/Mdmt2jxEX3Y">Video Youtube</a></p>
+
 ## Criterios de Evaluación
 <ul>
     <li>Funcionalidad Completa: La aplicación debe comparar dos inversiones.</li>
