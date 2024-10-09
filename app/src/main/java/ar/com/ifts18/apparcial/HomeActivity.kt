@@ -29,11 +29,17 @@ class HomeActivity: AppCompatActivity() {
         val botonCalcularRendimiento = findViewById<Button>(R.id.btCalcularRendimiento)
 
         val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-        val hNombre = misPreferencias.getString("username", "Admin")
+        val correo_global = misPreferencias.getString("correo_global", null)
 
-        val entradaDeInversion = "Plazo Fijo"
+        val usuariosShared = getSharedPreferences("user_$correo_global", Context.MODE_PRIVATE)
+
+        val hNombre = usuariosShared.getString("nombre", "Admin")
+
+
         // Muestro saludo de Bienvenida
-        tvNumero2.text = "¡Bienvenido $hNombre!"
+        if (hNombre != null) {
+            tvNumero2.text = "¡Bienvenido ${hNombre.replaceFirstChar { it.titlecase() }}!"
+        }
 
 
         // Cargo Spinner para Banco y tipo de Inversion
@@ -72,7 +78,7 @@ class HomeActivity: AppCompatActivity() {
             }else if(monto?.toInt() ==0) {
                 mostrarToast("El monto no puede ser cero")
             }else if(etPlazoEnDias.text.isEmpty()) {
-                mostrarToast("El plazo de dias no puede estar vacio")
+                mostrarToast("El plazo de Diaz no puede estar vacio")
             } else if(PlazoEndias==0){
                 mostrarToast("El plazo no puede ser cero")
             }else if(entradaDeBanco == getString(R.string.elija_banco)) {

@@ -31,7 +31,11 @@ class RendimientoActivity: AppCompatActivity() {
 
         // Traigo Shared Preferences para info usuario
         val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-        val usuarioPreference = misPreferencias.getString("username", "Admin")
+        val correo_global = misPreferencias.getString("correo_global", null)
+
+        val usuariosShared = getSharedPreferences("user_$correo_global", Context.MODE_PRIVATE)
+
+        val usuarioPreference = usuariosShared.getString("nombre", "Admin")
         tvTitulo.text = "¡Felicidades $usuarioPreference!"
 
         // Recibo los parametros de Home
@@ -167,8 +171,12 @@ Inversion elegida: ${inversionString.uppercase()}
          """
         // String.format("%.2f", interesGanado)
 
-        // Inicializa SharedPreferences
-        val historialGuardar = getSharedPreferences("historialPreferences", Context.MODE_PRIVATE)
+        // Traigo Shared Preferences para info usuario
+        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val correo_global = misPreferencias.getString("correo_global", null)
+
+        val historialGuardar = getSharedPreferences("user_$correo_global", Context.MODE_PRIVATE)
+
 
         // Obtén el número de registros actuales (limitar a 5)
         val contadorRegistro = historialGuardar.getInt("contador", 0)

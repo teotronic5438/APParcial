@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
     // TANTO PARA NO BORRAR INFOOOOOOOOOOOOOOOOOOOOOOOO
     private lateinit var tycLauncher: ActivityResultLauncher<Intent>
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,23 +25,6 @@ class MainActivity : AppCompatActivity() {
         val etApellido = findViewById<EditText>(R.id.etApellido)
         val etCorreo = findViewById<EditText>(R.id.etCorreo)
 
-        // SOLO PARA PRUEBAS HOME DESPUES BORRAR
-        val solopruebas = findViewById<Button>(R.id.pruebasAHome)
-        solopruebas.setOnClickListener{
-            irAHome()
-        }
-
-        val solorendimiento = findViewById<Button>(R.id.pruebasARendimiento)
-        solorendimiento.setOnClickListener{
-            irARendimiento()
-        }
-
-        val solohistorial = findViewById<Button>(R.id.pruebasAHistorial)
-        solohistorial.setOnClickListener{
-            irAHistorial()
-        }
-
-        // SOLO PARA PRUEBAS HOME DESPUES BORRAR
 
         // Inicializa el launcher para manejar el resultado
         tycLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -59,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         // evento, al hacer click abre actvity TyC
         caja.setOnClickListener{
             caja.isChecked = false
@@ -70,64 +51,102 @@ class MainActivity : AppCompatActivity() {
         // Llamo a SharedPreferences y extraigo "terminosAceptados"
         val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
         val terminosAceptados = misPreferencias.getBoolean("terminosAceptados", false)
+
+
         // Dependiendo el boton presionado se cambia el estado del CheckBox
         caja.isChecked = terminosAceptados
 
         // en este archivo guaddate la key estaLogeado en false y ademas guardala en yaSeLogueo
-        val testCompletado = misPreferencias.getBoolean("testCompletado", false)
+
 
 
         // logica de validacion
         botonTC.setOnClickListener {
-            // casteo datos
             val nombre = etNombre.text.toString()
             val apellido = etApellido.text.toString()
             val correo = etCorreo.text.toString()
 
-            val usernameGuardado = misPreferencias.getString("username", null)
-            val userlastnameGuardado = misPreferencias.getString("userlastname", null)
-            val useremailGuardado = misPreferencias.getString("useremail", null)
-
             // Verifico que haya llenado todos los campos
-            if (nombre.isEmpty()){
+            if (nombre.isEmpty()) {
+
                 mostrarToast("Complete el nombre")
-            } else if(apellido.isEmpty()){
+
+            } else if (apellido.isEmpty()) {
+
                 mostrarToast("Complete su apellido")
-            } else if(correo.isEmpty()) {
+
+            } else if (correo.isEmpty()) {
+
                 mostrarToast("Complete su correo")
-            } else if(!android.util.Patterns.EMAIL_ADDRESS.matcher(correo).matches()){
-                mostrarToast("El formato de correo es invalido!")
+
+            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+
+                mostrarToast("El formato de correo es inválido")
+
             } else if (!caja.isChecked) {
-                // Verifico que el checkbox de términos y condiciones está marcado
-                mostrarToast("Debes aceptar los términos y condiciones.")
+
+                mostrarToast("Debes aceptar los términos y condiciones")
+
             } else {
-                // Verifico si no hay usuario guardado
-                if (usernameGuardado != null && useremailGuardado != null) {
-                    // Verifico si el usuario actual coincide con el guardado
-                    if (usernameGuardado == nombre &&
-                        userlastnameGuardado == apellido &&
-                        useremailGuardado == correo && testCompletado) {
 
-                        // Si coincide, ir a la actividad Home
-                        mostrarToast("Ya estás logeado")
-                        irAHome()
-                        return@setOnClickListener
-                    }
-                }
-
-                // Guardar datos de usuario en SharedPreferences
-                misPreferencias.edit().apply {
-                    putString("username", nombre)
-                    putString("userlastname", apellido)
-                    putString("useremail", correo)
+                // usaremos la key para usar global durante el uso de la app
+                misPreferencias.edit().apply{
+                    putString("correo_global", correo)
                     apply()
                 }
 
-                // Ir a Test Inversor
-                irATestInversor()
+                // CAMINO FELIZ: LLENO CORRECTAMENTE LOS CAMPOS
+                // Verifico si el usuario ya está registrado (CREO SHARED CON KEY POR USUARIO USO EL CORREO)
+                val usuariosShared = getSharedPreferences("user_$correo", Context.MODE_PRIVATE)
+                val test_completado = usuariosShared.getBoolean("test_completado", false)
+                // Traifgo el correo usandolo como key para ver si ya tuvo ingresos o no
+                val correo_shared = usuariosShared.getString("correo", null)
+
+                if (correo_shared == null) {
+                    // SI NO LO ENCUENTRA ES PORQUE ES LA PRIMERA VEZ QUE INGRESA
+                    val editorUsuariosShared = usuariosShared.edit()
+                    editorUsuariosShared.putString("nombre", nombre)
+                    editorUsuariosShared.putString("apellido", apellido)
+                    editorUsuariosShared.putString("correo", correo)
+                    editorUsuariosShared.putString("perfil", "")
+                    editorUsuariosShared.putBoolean("test_completado", false)
+                    editorUsuariosShared.putBoolean("terminos_aceptados", true)
+                    editorUsuariosShared.apply()
+
+                    // Redirigimos a la pantalla del Test de Inversor
+                    mostrarToast("Redirigiendo a Test Inversor")
+                    irATestInversor()
+                } else {
+                    // YA ESTÁ REGISTRADO - Verificamos si completó el test o no
+                    if (test_completado) {
+                        // El test ya fue completado, lo redirigimos a HomeActivity
+                        mostrarToast("Ya completaste el test, redirigiendo a Home")
+                        irAHome()
+                    } else {
+                        // No ha completado el test, lo redirigimos a TestInversorActivity
+                        mostrarToast("Debes completar el Test Inversor")
+                        irATestInversor()
+                    }
+                }
             }
         }
 
+        // SOLO PARA PRUEBAS HOME DESPUES BORRAR
+        val solopruebas = findViewById<Button>(R.id.pruebasAHome)
+        solopruebas.setOnClickListener{
+            irAHome()
+        }
+
+        val solorendimiento = findViewById<Button>(R.id.pruebasARendimiento)
+        solorendimiento.setOnClickListener{
+            irARendimiento()
+        }
+
+        val solohistorial = findViewById<Button>(R.id.pruebasAHistorial)
+        solohistorial.setOnClickListener{
+            irAHistorial()
+        }
+        // SOLO PARA PRUEBAS HOME DESPUES BORRAR
 
     }
     private fun irATerminosYCondiciones() {
@@ -138,6 +157,7 @@ class MainActivity : AppCompatActivity() {
     private fun irATestInversor(){
         val intent = Intent(this, TestInversorActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun irAHome(){
