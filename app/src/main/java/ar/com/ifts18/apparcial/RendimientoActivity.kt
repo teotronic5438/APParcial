@@ -36,7 +36,9 @@ class RendimientoActivity: AppCompatActivity() {
         val usuariosShared = getSharedPreferences("user_$correo_global", Context.MODE_PRIVATE)
 
         val usuarioPreference = usuariosShared.getString("nombre", "Admin")
-        tvTitulo.text = "¡Felicidades $usuarioPreference!"
+        if (usuarioPreference != null) {
+            tvTitulo.text = "¡Felicidades ${usuarioPreference.replaceFirstChar { it.uppercase() }}!"
+        }
 
         // Recibo los parametros de Home
         val montoDouble = intent.getDoubleExtra("MONTO_DOBLE", 0.0)
@@ -57,32 +59,6 @@ class RendimientoActivity: AppCompatActivity() {
         bancos["Banco BBVA"] = 35.5
         bancos["Banco HSBC"] = 37.0 // 37.0
 
-
-        /*
-
-        / Crear un listado con todos los bancos
-        val bancos = mutableListOf<Map<String, Map<String, Double>>>()
-
-        // Agregar registros al listado
-        bancos.add(mapOf("Nacion" to mapOf("plazoFijo" to 39.0, "FCI" to 56.0)))
-        bancos.add(mapOf("Santander" to mapOf("plazoFijo" to 33.0, "FCI" to 45.0)))
-        bancos.add(mapOf("Galicia" to mapOf("plazoFijo" to 37.5, "FCI" to 60.0)))
-        bancos.add(mapOf("BBVA" to mapOf("plazoFijo" to 35.5, "FCI" to 45.0)))
-        bancos.add(mapOf("HSBC" to mapOf("plazoFijo" to 37.0, "FCI" to 60.0)))
-
-        // Buscar el valor de tnaBanco
-        val tnaBanco: Double? = bancos.find { it.containsKey(bancoString) }
-            ?.get(bancoString)
-            ?.get(inversionString)
-
-        // Verificar el resultado y mostrar el valor
-        if (tnaBanco != null) {
-            println("La TNA de $bancoString para $inversionString es: $tnaBanco")
-        } else {
-            println("No se encontró información para el banco $bancoString y la inversión $inversionString.")
-        }
-
-        */
 
         val tnaBanco: Double? = bancos[bancoString]
 
@@ -206,105 +182,5 @@ Inversion elegida: ${inversionString.uppercase()}
         // mostrarToast("Registro guardado: $nuevoRegistro")
     }
 
-    /*
-    private fun guardarEnHistorialPreferences(montoDouble: Double, plazoInt: Int, bancoString: String, interesGanado: Double, ROIcalculado: Double) {
-        // Recupero los datos de usuario de Shared "MyPreferences"
-        val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-        val nombre = misPreferencias.getString("username", "N/A")
-        val apellido = misPreferencias.getString("userlastname", "N/A")
-        val tipoInversor = misPreferencias.getString("perfil", "N/A")
-        // val montoUser = misPreferencias.getString("monto", "0")
-
-        // Defino un nuevo Shared Preference para guardar los datos en historial
-        val historialPreferences = getSharedPreferences("HistorialPreferences", Context.MODE_PRIVATE)
-        val editor = historialPreferences.edit()
-
-        // Recuperamos las listas existentes (si no existen, se inicializan como vacías)
-        val listaMontos = historialPreferences.getStringSet("montos", mutableSetOf())?.toMutableSet()
-        val listaPlazos = historialPreferences.getStringSet("plazos", mutableSetOf())?.toMutableSet()
-        val listaBancos = historialPreferences.getStringSet("bancos", mutableSetOf())?.toMutableSet()
-        val listaIntereses = historialPreferences.getStringSet("intereses", mutableSetOf())?.toMutableSet()
-        val listaROIs = historialPreferences.getStringSet("rois", mutableSetOf())?.toMutableSet()
-
-        // Recuperamos las listas existentes para estos datos adicionales
-        val listaNombres = historialPreferences.getStringSet("nombres", mutableSetOf())?.toMutableSet()
-        val listaApellidos = historialPreferences.getStringSet("apellidos", mutableSetOf())?.toMutableSet()
-        val listaTipoInversor = historialPreferences.getStringSet("tiposInversor", mutableSetOf())?.toMutableSet()
-        // val listaMontosUser = historialPreferences.getStringSet("montosUser", mutableSetOf())?.toMutableSet()
-
-        // Convertir los valores actuales en strings para almacenarlos en los sets
-        val montoString = montoDouble.toString()
-        val plazoString = plazoInt.toString()
-        val interesString = String.format("%.2f", interesGanado)
-        val roiString = String.format("%.2f", ROIcalculado)
-
-        // Mantenemos un límite de 5 registros
-        if (listaMontos != null) {
-            if (listaMontos.size >= 5) {
-                listaMontos.remove(listaMontos.first())
-                if (listaPlazos != null) {
-                    listaPlazos.remove(listaPlazos.first())
-                }
-                if (listaBancos != null) {
-                    listaBancos.remove(listaBancos.first())
-                }
-                if (listaIntereses != null) {
-                    listaIntereses.remove(listaIntereses.first())
-                }
-                if (listaROIs != null) {
-                    listaROIs.remove(listaROIs.first())
-                }
-                if (listaNombres != null) {
-                    listaNombres.remove(listaNombres.first())
-                }
-                if (listaApellidos != null) {
-                    listaApellidos.remove(listaApellidos.first())
-                }
-                if (listaTipoInversor != null) {
-                    listaTipoInversor.remove(listaTipoInversor.first())
-                }
-            }
-        }
-
-
-        // Agregamos los nuevos datos a las listas
-        if (listaMontos != null) {
-            listaMontos.add(montoString)
-        }
-        if (listaPlazos != null) {
-            listaPlazos.add(plazoString)
-        }
-        if (listaBancos != null) {
-            listaBancos.add(bancoString)
-        }
-        if (listaIntereses != null) {
-            listaIntereses.add(interesString)
-        }
-        if (listaROIs != null) {
-            listaROIs.add(roiString)
-        }
-        if (listaNombres != null) {
-            listaNombres.add(nombre)
-        }
-        if (listaApellidos != null) {
-            listaApellidos.add(apellido)
-        }
-        if(listaTipoInversor != null) {
-            listaTipoInversor.add(tipoInversor)
-        }
-
-        // Guardamos las listas actualizadas en SharedPreferences
-        editor.putStringSet("montos", listaMontos)
-        editor.putStringSet("plazos", listaPlazos)
-        editor.putStringSet("bancos", listaBancos)
-        editor.putStringSet("intereses", listaIntereses)
-        editor.putStringSet("rois", listaROIs)
-        editor.putStringSet("nombres", listaNombres)
-        editor.putStringSet("apellidos", listaApellidos)
-        editor.putStringSet("tiposInversor", listaTipoInversor)
-        // Aplicar cambios
-        editor.apply()
-    }
-    */
 
 }

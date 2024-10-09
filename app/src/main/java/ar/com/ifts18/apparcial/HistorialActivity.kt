@@ -29,7 +29,7 @@ class HistorialActivity: AppCompatActivity() {
         if (hNombre != null) {
             if (hUsername != null) {
                 if (hPerfil != null) {
-                    tvDatosUsuario.text = "Hola ${hNombre.uppercase()} ${hUsername.uppercase()} su perfil es ${hPerfil.uppercase()}"
+                    tvDatosUsuario.text = "Hola ${hNombre.replaceFirstChar { it.titlecase() }} ${hUsername.replaceFirstChar { it.titlecase() }} su perfil es ${hPerfil.replaceFirstChar { it.titlecase() }}.\nEstas son sus ultimas consultas:"
                 }
             }
         }
