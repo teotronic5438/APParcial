@@ -1,75 +1,73 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-=======
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
->>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:gravity="center_horizontal">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
 
     <TextView
         android:id="@+id/tvNumero2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:gravity="center_horizontal"
-        android:padding="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvNumero3"
         />
 
     <TextView
         android:id="@+id/tvNumero3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿que inversion desea simular?"
+        android:text="@string/que_inversi_n_desea_simular"
         android:textSize="20sp"
-        android:gravity="center_horizontal"
-        android:padding="20dp"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/et1" />
+
     <EditText
         android:id="@+id/et1"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:hint="@string/ingrese_monto_a_invertir"
         android:layout_height="48dp"
-        android:hint="Ingrese el monto a invertir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:autofillHints=""
         android:inputType="numberDecimal"
-        android:layout_marginTop="30dp" />
+        />
 
     <EditText
         android:id="@+id/et2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:hint="Ingrese el plazo en dias"
+        android:hint="@string/ingrese_plazo_de_dias"
+        app:layout_constraintTop_toBottomOf="@+id/et1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:autofillHints=""
         android:inputType="number"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
 
+        />
     <Spinner
         android:id="@+id/banco_spinner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:spinnerMode="dropdown"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et2"
+        />
 
-    <Button
-        android:id="@+id/btCalcularRendimiento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calcular rendimiento"
-        android:layout_marginTop="160dp" />
 
-<<<<<<< HEAD
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-=======
     <Spinner
         android:id="@+id/inversion_spinner"
         android:layout_width="0dp"
@@ -79,24 +77,10 @@
         android:layout_height="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
->>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
 
-        <Button
-            android:id="@+id/btSalir"
-            android:layout_width="135dp"
-            android:layout_height="wrap_content"
-            android:text="Salir"
-            android:layout_weight="1" />
+   <Button
+       android:id="@+id/btCalcularRendimiento"
 
-<<<<<<< HEAD
-        <Button
-            android:id="@+id/btVerHistorial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ver historial"
-            android:layout_weight="1" />
-    </LinearLayout>
-=======
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="@string/calcular_rendimiento"
@@ -129,6 +113,4 @@
        android:layout_marginBottom="35dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
 
-</LinearLayout>

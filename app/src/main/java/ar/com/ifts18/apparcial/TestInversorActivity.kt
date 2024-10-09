@@ -108,10 +108,13 @@ class TestInversorActivity : AppCompatActivity() {
 
                         // guardo en my shared preferences el perfil
                         val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-                        misPreferencias.edit().apply {
+                        val correo_global = misPreferencias.getString("correo_global", null)
 
+                        val usuariosShared = getSharedPreferences("user_$correo_global", Context.MODE_PRIVATE)
+
+                        usuariosShared.edit().apply {
                             putString("perfil", perfil)
-                            putBoolean("testCompletado", true)
+                            putBoolean("test_completado", true)
                             apply()
                         }
                         irAHomeActivity()
@@ -141,11 +144,14 @@ class TestInversorActivity : AppCompatActivity() {
 
 
         btCancel.setOnClickListener {
-
             val misPreferencias = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
-            misPreferencias.edit().apply {
+            val correo_global = misPreferencias.getString("correo_global", null)
 
-                putBoolean("testCompletado", false)
+            val usuariosShared = getSharedPreferences("user_$correo_global", Context.MODE_PRIVATE)
+
+            usuariosShared.edit().apply {
+
+                putBoolean("test_completado", false)
                 apply()
             }
 
