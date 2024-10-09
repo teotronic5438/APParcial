@@ -1,17 +1,10 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-=======
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
->>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".MainActivity"
     android:gravity="center_horizontal">
 
     <TextView
@@ -20,18 +13,16 @@
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:gravity="center_horizontal"
-        android:padding="30dp"
-        />
+        android:padding="30dp" />
 
     <TextView
         android:id="@+id/tvNumero3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿que inversion desea simular?"
+        android:text="¿Que inversion desea simular?"
         android:textSize="20sp"
         android:gravity="center_horizontal"
-        android:padding="20dp"
-        />
+        android:padding="20dp" />
     <EditText
         android:id="@+id/et1"
         android:layout_width="match_parent"
@@ -55,80 +46,49 @@
         android:spinnerMode="dropdown"
         android:layout_marginTop="30dp" />
 
-    <Button
+    <Spinner
+        android:id="@+id/inversion_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:spinnerMode="dropdown"
+        android:layout_marginTop="30dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btCalcularRendimiento"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Calcular rendimiento"
-        android:layout_marginTop="160dp" />
+        android:layout_marginTop="70dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_gradient"
+        />
 
-<<<<<<< HEAD
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
         android:orientation="horizontal"
-        android:gravity="center">
-=======
-    <Spinner
-        android:id="@+id/inversion_spinner"
-        android:layout_width="0dp"
-        android:spinnerMode="dropdown"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/banco_spinner"
-        android:layout_height="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
->>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
+        android:gravity="center"
+        android:paddingTop="16dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btSalir"
-            android:layout_width="135dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="Salir"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:background="@drawable/button_gradient"
+            android:layout_marginEnd="130dp"/>
 
-<<<<<<< HEAD
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btVerHistorial"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="Ver historial"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:background="@drawable/button_gradient"/>
     </LinearLayout>
-=======
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/calcular_rendimiento"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       android:layout_marginTop="50dp"
-       app:layout_constraintTop_toBottomOf="@+id/inversion_spinner"
-       />
-   <Button
-       android:id="@+id/btSalir"
-       android:layout_width="135dp"
-       android:layout_height="wrap_content"
-       android:text="@string/salir"
-       app:layout_constraintEnd_toStartOf="@+id/btVerHistorial"
-       app:layout_constraintHorizontal_bias="0.5"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintWidth_percent="0.5"
-       android:layout_marginBottom="35dp" />
-
-   <Button
-       android:id="@+id/btVerHistorial"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="@string/ver_historial"
-       app:layout_constraintStart_toEndOf="@+id/btSalir"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintWidth_percent="0.5"
-       android:layout_marginBottom="35dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> 9677d9c433f9b3f3b4f58d52b170458dbd643dda
 
 </LinearLayout>
